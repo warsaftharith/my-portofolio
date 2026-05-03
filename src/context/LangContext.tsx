@@ -1,6 +1,11 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
-type Lang = "en" | "id" | "jp" | "ar" | "sas";
+/**
+ * 🔥 Daftar bahasa cukup ditambah di sini saja
+ */
+export const LANGUAGES = ["en", "id", "jp", "ar", "sas"] as const;
+
+export type Lang = (typeof LANGUAGES)[number];
 
 type LangContextType = {
   lang: Lang;
@@ -9,19 +14,33 @@ type LangContextType = {
 
 const LangContext = createContext<LangContextType | null>(null);
 
-export const LangProvider = ({ children }: { children: React.ReactNode }) => {
-  const [lang, setLangState] = useState<Lang>("jp");
+/**
+ * helper untuk validasi bahasa
+ */
+const isValidLang = (value: string | null): value is Lang => {
+  return value !== null && (LANGUAGES as readonly string[]).includes(value);
+};
 
+export const LangProvider = ({ children }: { children: React.ReactNode }) => {
+  const [lang, setLangState] = useState<Lang>("jp"); // default fallback
+
+  /**
+   * ambil dari localStorage saat pertama load
+   */
   useEffect(() => {
-  const savedLang = localStorage.getItem("lang");
-    if (savedLang === "en" || savedLang === "id" || savedLang === "jp") {
+    const savedLang = localStorage.getItem("lang");
+
+    if (isValidLang(savedLang)) {
       setLangState(savedLang);
     } else {
-      setLangState("id");
-      localStorage.setItem("lang", "id");
+      setLangState("jp"); // default kalau belum ada / invalid
+      localStorage.setItem("lang", "jp");
     }
   }, []);
 
+  /**
+   * setter aman + sync localStorage
+   */
   const setLang = (newLang: Lang) => {
     setLangState(newLang);
     localStorage.setItem("lang", newLang);
@@ -34,8 +53,13 @@ export const LangProvider = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
+/**
+ * custom hook
+ */
 export const useLang = () => {
   const context = useContext(LangContext);
-  if (!context) throw new Error("useLang must be used inside LangProvider");
+  if (!context) {
+    throw new Error("useLang must be used inside LangProvider");
+  }
   return context;
 };
