@@ -2,7 +2,7 @@ import project1 from "@/assets/images/project1.png";
 import project2 from "@/assets/images/project2.png";
 import project3 from "@/assets/images/project3.png";
 
-export const sasak = {
+export const sas = {
   // Navigasi
   navbar: {
     home: 'Beranda',
@@ -30,7 +30,7 @@ export const sasak = {
         year: '2024 - saiki',
         title: 'Pengembang Frontend (Freelance)',
         company: 'Perusahaan Solusi Teknologi',
-        description: 'Nggawe dashboard POS multi-tenant nganggo React & Laravel.',
+        description: 'Nggawe dashboard POS multi-tenant kadu React & Laravel.',
         color: 'bg-emerald-500',
       },
       {
@@ -64,7 +64,7 @@ export const sasak = {
   // Proyek
   projects: {
     title: 'Proyek Portofolio',
-    subtitle: 'Piraq proyek paling bagus saq pernah tiang garap',
+    subtitle: 'Sekeq-sekeq proyek paling solah saq tiang wah piak',
     featured: 'Unggulan',
     liveDemo: 'Demo Langsung',
     github: 'GitHub',
@@ -115,7 +115,7 @@ export const sasak = {
   contact: {
     title: 'Ayo Kolaborasi',
     subtitle: 'Punyaq proyek menarik? Kirim pesan, tiang gen bales cepat.',
-    namePlaceholder: 'Araq Lengkap',
+    namePlaceholder: 'Aran Lengkap',
     emailPlaceholder: 'Email',
     phonePlaceholder: 'Nomor Telepon',
     messagePlaceholder: 'Tulis pesan side',

@@ -4,6 +4,7 @@ import { en } from "../lang/en";
 import { id } from "../lang/id";
 import { jp } from "../lang/jp";
 import { ar } from "../lang/ar";
+import { sas } from "../lang/sas";
 
 const container: Variants = {
   hidden: {},
@@ -34,6 +35,7 @@ const Projects = () => {
     id: id.projects,
     jp: jp.projects,
     ar: ar.projects,
+    sas: sas.projects,
   };
 
   const t = translations[lang as keyof typeof translations];

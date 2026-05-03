@@ -5,6 +5,7 @@ import { en } from "../lang/en";
 import { id } from "../lang/id";
 import { jp } from "../lang/jp";
 import { ar } from "../lang/ar";
+import { sas } from "../lang/sas";
 
 const Footer = () => {
   const { lang } = useLang();
@@ -14,6 +15,7 @@ const Footer = () => {
     id: id.footer,
     jp: jp.footer,
     ar: ar.footer,
+    sas: sas.footer,
   };
 
   const t = translations[lang as keyof typeof translations];

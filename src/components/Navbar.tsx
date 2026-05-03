@@ -5,6 +5,7 @@ import { en } from "../lang/en";
 import { id } from "../lang/id";
 import { jp } from "../lang/jp";
 import { ar } from "../lang/ar";
+import { sas } from "../lang/sas";
 import { useLang } from "../context/LangContext";
 import logo from "@/assets/profile.jpeg";
 
@@ -34,6 +35,7 @@ const Navbar = () => {
         id: id.navbar,
         jp: jp.navbar,
         ar: ar.navbar,
+        sas: sas.navbar,
     };
 
     const t = translations[lang];
@@ -210,14 +212,15 @@ const Navbar = () => {
                                         { code: "en", label: "English" },
                                         { code: "id", label: "Indonesia" },
                                         { code: "jp", label: "日本語" },
-                                        { code: "ar", label: "العربية" }
+                                        { code: "ar", label: "العربية" },
+                                        { code: "sas", label: "Sasak" }
                                     ].map((item) => (
                                         <button
                                             key={item.code}
                                             type="button"
                                             onClick={(e) => {
                                                 e.stopPropagation();
-                                                setLang(item.code as "en" | "id" | "jp" | "ar");
+                                                setLang(item.code as "en" | "id" | "jp" | "ar" | "sas");
                                                 setOpenLang(false);
                                             }}
                                             className={`w-full flex items-center justify-between px-4 py-3 text-sm transition-colors ${
@@ -308,14 +311,15 @@ const Navbar = () => {
                                                     { code: "en", label: "English" },
                                                     { code: "id", label: "Indonesia" },
                                                     { code: "jp", label: "日本語" },
-                                                    { code: "ar", label: "العربية" }
+                                                    { code: "ar", label: "العربية" },
+                                                    { code: "sas", label: "Sasak" }
                                                 ].map((item) => (
                                                     <button
                                                         key={item.code}
                                                         type="button"
                                                         onClick={(e) => {
                                                             e.stopPropagation();
-                                                            setLang(item.code as "en" | "id" | "jp" | "ar");
+                                                            setLang(item.code as "en" | "id" | "jp" | "ar" | "sas");
                                                             setOpenLang(false);
                                                         }}
                                                         className={`w-full flex items-center justify-between px-4 py-3 text-sm transition-colors ${

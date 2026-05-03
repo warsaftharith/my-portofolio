@@ -16,6 +16,7 @@ import { en } from "../lang/en";
 import { id } from "../lang/id";
 import { jp } from "../lang/jp";
 import { ar } from "../lang/ar";
+import { sas } from "../lang/sas";
 
 const skillIcons: Record<string, React.ReactNode> = {
   HTML5: <SiHtml5 />,
@@ -73,6 +74,7 @@ const Skills = () => {
     id: id.skills,
     jp: jp.skills,
     ar: ar.skills,
+    sas: sas.skills,
   };
 
   const t = translations[lang as keyof typeof translations];

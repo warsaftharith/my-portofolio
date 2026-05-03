@@ -4,6 +4,7 @@ import { en } from "../lang/en";
 import { id } from "../lang/id";
 import { jp } from "../lang/jp";
 import { ar } from "../lang/ar";
+import { sas } from "../lang/sas";
 
 const About = () => {
   const { lang } = useLang();
@@ -12,6 +13,7 @@ const About = () => {
     id: id.about,
     jp: jp.about,
     ar: ar.about,
+    sas: sas.about,
   };
 
   const t = translations[lang as keyof typeof translations];

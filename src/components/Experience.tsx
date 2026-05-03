@@ -4,6 +4,7 @@ import { en } from "../lang/en";
 import { id } from "../lang/id";
 import { jp } from "../lang/jp";
 import { ar } from "../lang/ar";
+import { sas } from "../lang/sas";
 
 type ExperienceItem = {
   year: string;
@@ -48,6 +49,7 @@ const Experience = () => {
     id: id.experience,
     jp: jp.experience,
     ar: ar.experience,
+    sas: sas.experience,
   };
 
   const t = translations[lang as keyof typeof translations];

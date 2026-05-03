@@ -6,6 +6,7 @@ import { en } from "../lang/en";
 import { id } from "../lang/id";
 import { jp } from "../lang/jp";
 import { ar } from "../lang/ar";
+import { sas } from "../lang/sas";
 
     const fadeUp: Variants = {
     hidden: { opacity: 0, y: 40 },
@@ -35,6 +36,7 @@ import { ar } from "../lang/ar";
         id: id.hero,
         jp: jp.hero,
         ar: ar.hero,
+        sas: sas.hero,
     };
 
     const t = translations[lang as keyof typeof translations];

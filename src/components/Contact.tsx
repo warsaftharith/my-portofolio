@@ -8,6 +8,7 @@ import { en } from "../lang/en";
 import { id } from "../lang/id";
 import { jp } from "../lang/jp";
 import { ar } from "../lang/ar";
+import { sas } from "../lang/sas";
 
 // ================== VARIANTS ==================
 const fadeUp: Variants = {
@@ -35,6 +36,7 @@ const Contact = () => {
     id: id.contact,
     jp: jp.contact,
     ar: ar.contact,
+    sas: sas.contact,
   };
 
   const t = translations[lang as keyof typeof translations];
