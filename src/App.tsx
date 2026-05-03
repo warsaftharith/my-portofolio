@@ -11,6 +11,8 @@ import LoadingScreen from "./components/LoadingScreen.tsx";
 
 // analys
 import { Analytics } from "@vercel/analytics/react";
+// speed
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -31,6 +33,7 @@ function App() {
       )}
 
       <Analytics />
+      <SpeedInsights />
     </>
   );
 }
