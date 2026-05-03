@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Globe, Check, Menu, X } from "lucide-react";
 import { useLang } from "../context/LangContext";
+import logo from "@/assets/profile.jpeg";
 
 type MenuKey = "home" | "about" | "skills" | "projects" | "contact";
 
@@ -139,9 +140,16 @@ const Navbar = () => {
         <nav className="fixed top-0 left-0 w-full z-50 bg-gradient-to-b from-white/80 to-white/0 dark:from-slate-950/80 dark:to-slate-950/0 backdrop-blur">
             <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
                 {/* LOGO */}
-                <h1 className="text-xl font-bold text-slate-900 dark:text-white">
-                    Warsa
-                </h1>
+                <div className="flex items-center gap-2">
+                    <img
+                        src={logo}
+                        alt="logo"
+                        className="w-8 h-8 object-cover rounded-full"
+                    />
+                    <h1 className="text-xl font-bold text-slate-900 dark:text-white">
+                        Warsa
+                    </h1>
+                </div>
 
                 {/* DESKTOP MENU */}
                 <ul className="hidden md:flex relative gap-8 text-sm font-medium items-center">
