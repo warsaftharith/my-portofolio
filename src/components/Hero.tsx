@@ -144,7 +144,7 @@ import { id } from "../lang/id";
                 </motion.a>
 
                 <a
-                    href="/public/cv/cv-wahyu.pdf"
+                    href="/cv/cv-wahyu.pdf"
                     download
                     className="px-6 sm:px-8 py-3.5 sm:py-4 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-semibold rounded-xl hover:scale-105 transition-all duration-300 text-sm sm:text-base w-full sm:w-auto text-center sm:text-left"
                     >
