@@ -7,6 +7,7 @@ import { useLang } from "../context/LangContext";
 import { en } from "../lang/en";
 import { id } from "../lang/id";
 import { jp } from "../lang/jp";
+import { ar } from "../lang/ar";
 
 // ================== VARIANTS ==================
 const fadeUp: Variants = {
@@ -33,6 +34,7 @@ const Contact = () => {
     en: en.contact,
     id: id.contact,
     jp: jp.contact,
+    ar: ar.contact,
   };
 
   const t = translations[lang as keyof typeof translations];

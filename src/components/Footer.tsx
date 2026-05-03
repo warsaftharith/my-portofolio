@@ -4,6 +4,7 @@ import { useLang } from "../context/LangContext";
 import { en } from "../lang/en";
 import { id } from "../lang/id";
 import { jp } from "../lang/jp";
+import { ar } from "../lang/ar";
 
 const Footer = () => {
   const { lang } = useLang();
@@ -12,6 +13,7 @@ const Footer = () => {
     en: en.footer,
     id: id.footer,
     jp: jp.footer,
+    ar: ar.footer,
   };
 
   const t = translations[lang as keyof typeof translations];

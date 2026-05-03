@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { en } from "../lang/en";
 import { id } from "../lang/id";
 import { jp } from "../lang/jp";
+import { ar } from "../lang/ar";
 
     const fadeUp: Variants = {
     hidden: { opacity: 0, y: 40 },
@@ -33,6 +34,7 @@ import { jp } from "../lang/jp";
         en: en.hero,
         id: id.hero,
         jp: jp.hero,
+        ar: ar.hero,
     };
 
     const t = translations[lang as keyof typeof translations];

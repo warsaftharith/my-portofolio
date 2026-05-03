@@ -3,6 +3,7 @@ import { useLang } from "../context/LangContext";
 import { en } from "../lang/en";
 import { id } from "../lang/id";
 import { jp } from "../lang/jp";
+import { ar } from "../lang/ar";
 
 type ExperienceItem = {
   year: string;
@@ -46,6 +47,7 @@ const Experience = () => {
     en: en.experience,
     id: id.experience,
     jp: jp.experience,
+    ar: ar.experience,
   };
 
   const t = translations[lang as keyof typeof translations];

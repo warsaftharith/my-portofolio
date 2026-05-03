@@ -15,6 +15,7 @@ import { useLang } from "../context/LangContext";
 import { en } from "../lang/en";
 import { id } from "../lang/id";
 import { jp } from "../lang/jp";
+import { ar } from "../lang/ar";
 
 const skillIcons: Record<string, React.ReactNode> = {
   HTML5: <SiHtml5 />,
@@ -71,6 +72,7 @@ const Skills = () => {
     en: en.skills,
     id: id.skills,
     jp: jp.skills,
+    ar: ar.skills,
   };
 
   const t = translations[lang as keyof typeof translations];

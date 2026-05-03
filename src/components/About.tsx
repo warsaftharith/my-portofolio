@@ -3,6 +3,7 @@ import { useLang } from "../context/LangContext";
 import { en } from "../lang/en";
 import { id } from "../lang/id";
 import { jp } from "../lang/jp";
+import { ar } from "../lang/ar";
 
 const About = () => {
   const { lang } = useLang();
@@ -10,6 +11,7 @@ const About = () => {
     en: en.about,
     id: id.about,
     jp: jp.about,
+    ar: ar.about,
   };
 
   const t = translations[lang as keyof typeof translations];

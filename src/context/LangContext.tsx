@@ -1,6 +1,6 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
-type Lang = "en" | "id" | "jp";
+type Lang = "en" | "id" | "jp"| "ar";
 
 type LangContextType = {
   lang: Lang;
@@ -10,7 +10,24 @@ type LangContextType = {
 const LangContext = createContext<LangContextType | null>(null);
 
 export const LangProvider = ({ children }: { children: React.ReactNode }) => {
-  const [lang, setLang] = useState<Lang>("id");
+  const [lang, setLangState] = useState<Lang>("id");
+
+  //ambil dari localStorage saat pertama kali load
+  useEffect(() => {
+  const savedLang = localStorage.getItem("lang");
+    if (savedLang === "en" || savedLang === "id" || savedLang === "jp") {
+      setLangState(savedLang);
+    } else {
+      setLangState("id");
+      localStorage.setItem("lang", "id");
+    }
+  }, []);
+
+  //wrapper setLang biar otomatis simpan ke localStorage
+  const setLang = (newLang: Lang) => {
+    setLangState(newLang);
+    localStorage.setItem("lang", newLang);
+  };
 
   return (
     <LangContext.Provider value={{ lang, setLang }}>
