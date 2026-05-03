@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Globe, Check, Menu, X } from "lucide-react";
+import { Globe, Check, Menu, X, Sun, Moon } from "lucide-react";
+import { useTheme } from "../context/ThemeContext";
 import { en } from "../lang/en";
 import { id } from "../lang/id";
 import { jp } from "../lang/jp";
@@ -18,6 +19,8 @@ const Navbar = () => {
     const [indicator, setIndicator] = useState({ left: 0, width: 0 });
     const [openLang, setOpenLang] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+    const { theme, toggleTheme } = useTheme();
 
     const itemRefs = useRef<Record<string, HTMLButtonElement | null>>({});
     const isClicking = useRef(false);
@@ -237,7 +240,18 @@ const Navbar = () => {
                             )}
                         </AnimatePresence>
                     </li>
+
+                    {/* THEME TOGGLE */}
+                    <li>
+                        <button
+                            onClick={toggleTheme}
+                            className="p-2 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:text-emerald-500 hover:border-emerald-500 transition-all duration-200"
+                        >
+                            {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+                        </button>
+                    </li>
                 </ul>
+
 
                 {/* MOBILE HAMBURGER BUTTON */}
                 <button
@@ -335,6 +349,15 @@ const Navbar = () => {
                                             </motion.div>
                                         )}
                                     </AnimatePresence>
+                                </li>
+                                <li className="pt-2">
+                                    <button
+                                        onClick={toggleTheme}
+                                        className="w-full flex items-center justify-between px-4 py-3 rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700"
+                                    >
+                                        <span>Theme</span>
+                                        {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+                                    </button>
                                 </li>
                             </ul>
                         </div>

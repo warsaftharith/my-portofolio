@@ -1,4 +1,6 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* Hide scrollbar */
 html {
@@ -12,3 +14,4 @@ body {
 body::-webkit-scrollbar {
   display: none; /* Chrome, Safari */
 }
+
