@@ -9,6 +9,9 @@ import Experience from "./components/Experience";
 import Contact from "./components/Contact";
 import LoadingScreen from "./components/LoadingScreen.tsx";
 
+// analys
+import { Analytics } from "@vercel/analytics/react";
+
 function App() {
   const [loading, setLoading] = useState(true);
 
@@ -26,6 +29,8 @@ function App() {
           <Contact />
         </Layout>
       )}
+
+      <Analytics />
     </>
   );
 }
