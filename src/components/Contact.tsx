@@ -6,6 +6,7 @@ import { FaLinkedin } from "react-icons/fa";
 import { useLang } from "../context/LangContext";
 import { en } from "../lang/en";
 import { id } from "../lang/id";
+import { jp } from "../lang/jp";
 
 // ================== VARIANTS ==================
 const fadeUp: Variants = {
@@ -28,7 +29,13 @@ const slideRight: Variants = {
 // ================== COMPONENT ==================
 const Contact = () => {
   const { lang } = useLang();
-  const t = lang === "en" ? en.contact : id.contact;
+  const translations = {
+    en: en.contact,
+    id: id.contact,
+    jp: jp.contact,
+  };
+
+  const t = translations[lang as keyof typeof translations];
 
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
 

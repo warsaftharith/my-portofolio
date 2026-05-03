@@ -1,6 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Globe, Check, Menu, X } from "lucide-react";
+import { en } from "../lang/en";
+import { id } from "../lang/id";
+import { jp } from "../lang/jp";
 import { useLang } from "../context/LangContext";
 import logo from "@/assets/profile.jpeg";
 
@@ -25,22 +28,13 @@ const Navbar = () => {
         { id: "contact", key: "contact" },
     ];
 
-    const translations: Record<"en" | "id", Record<MenuKey, string>> = {
-        en: {
-            home: "Home",
-            about: "About",
-            skills: "Skills",
-            projects: "Projects",
-            contact: "Contact",
-        },
-        id: {
-            home: "Beranda",
-            about: "Tentang",
-            skills: "Skill",
-            projects: "Proyek",
-            contact: "Kontak",
-        },
-    };
+    const translations = {
+    en: en.navbar,
+    id: id.navbar,
+    jp: jp.navbar,
+};
+
+    const t = translations[lang];
 
     const moveIndicator = (id: string) => {
         const el = itemRefs.current[id];
@@ -52,7 +46,7 @@ const Navbar = () => {
         });
     };
 
-    // ===== CLOSE DROPDOWN OUTSIDE CLICK
+    // CLOSE DROPDOWN OUTSIDE CLICK
     useEffect(() => {
         const handleClickOutside = (e: MouseEvent) => {
             const target = e.target as HTMLElement;
@@ -66,7 +60,7 @@ const Navbar = () => {
         return () => window.removeEventListener("click", handleClickOutside);
     }, []);
 
-    // ===== SCROLL ACTIVE SECTION
+    // SCROLL ACTIVE SECTION
     useEffect(() => {
         const handleScroll = () => {
             if (isClicking.current) return;
@@ -184,7 +178,7 @@ const Navbar = () => {
                                         : "text-slate-600 dark:text-slate-300 hover:text-emerald-500"
                                 }`}
                             >
-                                {translations[lang][item.key]}
+                                {t[item.key]}
                                 {/* Hover underline effect */}
                                 <span className="absolute -bottom-2 left-0 w-0 h-[2px] bg-emerald-500 group-hover:w-full transition-all duration-300" />
                             </button>
@@ -213,13 +207,14 @@ const Navbar = () => {
                                     {[
                                         { code: "en", label: "English" },
                                         { code: "id", label: "Indonesia" },
+                                        { code: "jp", label: "日本語" },
                                     ].map((item) => (
                                         <button
                                             key={item.code}
                                             type="button"
                                             onClick={(e) => {
                                                 e.stopPropagation();
-                                                setLang(item.code as "en" | "id");
+                                                setLang(item.code as "en" | "id" | "jp");
                                                 setOpenLang(false);
                                             }}
                                             className={`w-full flex items-center justify-between px-4 py-3 text-sm transition-colors ${
@@ -279,7 +274,7 @@ const Navbar = () => {
                                                     : "text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-emerald-500"
                                             }`}
                                         >
-                                            {translations[lang][item.key]}
+                                            {t[item.key]}
                                         </button>
                                     </li>
                                 ))}

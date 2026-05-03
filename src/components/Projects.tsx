@@ -2,6 +2,7 @@ import { motion, type Variants } from "framer-motion";
 import { useLang } from "../context/LangContext";
 import { en } from "../lang/en";
 import { id } from "../lang/id";
+import { jp } from "../lang/jp";
 
 const container: Variants = {
   hidden: {},
@@ -27,7 +28,13 @@ const card: Variants = {
 
 const Projects = () => {
   const { lang } = useLang();
-  const t = lang === "en" ? en.projects : id.projects;
+  const translations = {
+    en: en.projects,
+    id: id.projects,
+    jp: jp.projects,
+  };
+
+  const t = translations[lang as keyof typeof translations];
 
   return (
     <section

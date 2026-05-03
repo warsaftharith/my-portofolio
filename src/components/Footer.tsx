@@ -3,11 +3,18 @@ import { SiTiktok, SiGithub } from "react-icons/si";
 import { useLang } from "../context/LangContext";
 import { en } from "../lang/en";
 import { id } from "../lang/id";
+import { jp } from "../lang/jp";
 
 const Footer = () => {
   const { lang } = useLang();
 
-  const t = lang === "en" ? en.footer : id.footer;
+  const translations = {
+    en: en.footer,
+    id: id.footer,
+    jp: jp.footer,
+  };
+
+  const t = translations[lang as keyof typeof translations];
 
   const socials = [
     {

@@ -4,6 +4,7 @@ import { useLang } from "../context/LangContext";
 import { useEffect, useState } from "react";
 import { en } from "../lang/en";
 import { id } from "../lang/id";
+import { jp } from "../lang/jp";
 
     const fadeUp: Variants = {
     hidden: { opacity: 0, y: 40 },
@@ -28,8 +29,13 @@ import { id } from "../lang/id";
 
     const Hero = () => {
     const { lang } = useLang();
-    const t = lang === "en" ? en.hero : id.hero;
+    const translations = {
+        en: en.hero,
+        id: id.hero,
+        jp: jp.hero,
+    };
 
+    const t = translations[lang as keyof typeof translations];
     const fullText = t.subtitle;
 
     const [text, setText] = useState("");
@@ -154,7 +160,7 @@ import { id } from "../lang/id";
             </motion.div>
 
             {/* IMAGE */}
-                <motion.div
+            <motion.div
                 className="lg:col-span-5 flex justify-center lg:justify-end order-1 lg:order-2 w-full"
                 initial={{ opacity: 0, x: 60 }}
                 whileInView={{ opacity: 1, x: 0 }}

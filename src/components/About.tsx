@@ -2,10 +2,17 @@ import { motion } from "framer-motion";
 import { useLang } from "../context/LangContext";
 import { en } from "../lang/en";
 import { id } from "../lang/id";
+import { jp } from "../lang/jp";
 
 const About = () => {
   const { lang } = useLang();
-  const t = lang === "en" ? en.about : id.about;
+  const translations = {
+    en: en.about,
+    id: id.about,
+    jp: jp.about,
+  };
+
+  const t = translations[lang as keyof typeof translations];
 
   const skillColors = [
     "from-emerald-400 to-emerald-600",

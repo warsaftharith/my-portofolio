@@ -14,6 +14,7 @@ import { motion, type Variants } from "framer-motion";
 import { useLang } from "../context/LangContext";
 import { en } from "../lang/en";
 import { id } from "../lang/id";
+import { jp } from "../lang/jp";
 
 const skillIcons: Record<string, React.ReactNode> = {
   HTML5: <SiHtml5 />,
@@ -66,7 +67,13 @@ const card: Variants = {
 
 const Skills = () => {
   const { lang } = useLang();
-  const t = lang === "en" ? en.skills : id.skills;
+  const translations = {
+    en: en.skills,
+    id: id.skills,
+    jp: jp.skills,
+  };
+
+  const t = translations[lang as keyof typeof translations];
 
   return (
     <section

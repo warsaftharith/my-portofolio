@@ -2,6 +2,7 @@ import { motion, type Variants } from "framer-motion";
 import { useLang } from "../context/LangContext";
 import { en } from "../lang/en";
 import { id } from "../lang/id";
+import { jp } from "../lang/jp";
 
 type ExperienceItem = {
   year: string;
@@ -41,8 +42,13 @@ const rightItem: Variants = {
 const Experience = () => {
   const { lang } = useLang();
 
-  const t = lang === "en" ? en.experience : id.experience;
+  const translations = {
+    en: en.experience,
+    id: id.experience,
+    jp: jp.experience,
+  };
 
+  const t = translations[lang as keyof typeof translations];
   const data: ExperienceItem[] = t.items;
 
   return (
