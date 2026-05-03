@@ -304,13 +304,14 @@ const Navbar = () => {
                                                 {[
                                                     { code: "en", label: "English" },
                                                     { code: "id", label: "Indonesia" },
+                                                    { code: "jp", label: "日本語" },
                                                 ].map((item) => (
                                                     <button
                                                         key={item.code}
                                                         type="button"
                                                         onClick={(e) => {
                                                             e.stopPropagation();
-                                                            setLang(item.code as "en" | "id");
+                                                            setLang(item.code as "en" | "id" | "jp");
                                                             setOpenLang(false);
                                                         }}
                                                         className={`w-full flex items-center justify-between px-4 py-3 text-sm transition-colors ${
