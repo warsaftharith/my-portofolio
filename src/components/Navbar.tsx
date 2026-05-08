@@ -328,7 +328,7 @@ const Navbar = () => {
                         ease: [0.25, 0.1, 0.25, 1], // Kurva premium se-smooth komponen Skills
                         }}
                         style={{ willChange: "transform" }}
-                        className="fixed top-0 right-0 h-full w-72 z-50 md:hidden bg-white dark:bg-slate-900 border-l border-slate-200 dark:border-slate-800 shadow-2xl flex flex-col"
+                        className="fixed top-0 right-0 h-full w-72 z-50 md:hidden bg-white dark:bg-slate-900 border-l border-slate-200 dark:border-slate-800 flex flex-col"
                     >
                         {/* HEADER */}
                         <div className="p-4 border-b border-slate-200 dark:border-slate-800">
@@ -437,7 +437,7 @@ const Navbar = () => {
                                     initial={{ opacity: 0, height: 0, y: 4 }}
                                     animate={{ opacity: 1, height: "auto", y: 0 }}
                                     exit={{ opacity: 0, height: 0, y: 4 }}
-                                    className="absolute bottom-full mb-2 w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-2xl z-[60] overflow-hidden"
+                                    className="absolute bottom-full mb-2 w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl z-[60] overflow-hidden"
                                     >
                                     <div className="py-1.5 px-1.5">
                                         {[
