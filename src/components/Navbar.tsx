@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Globe, Check, Menu, X, Sun, Moon } from "lucide-react";
+import { Globe, Check, Menu, X, Sun, Moon,ChevronDown } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
 import { en } from "../lang/en";
 import { id } from "../lang/id";
@@ -301,144 +301,191 @@ const Navbar = () => {
             </nav>
 
             {/* MOBILE SIDEBAR MENU */}
-            <AnimatePresence>
+            <AnimatePresence mode="wait">
                 {isMobileMenuOpen && (
                     <>
-                        {/* OVERLAY */}
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            className="fixed inset-0 bg-black/20 dark:bg-black/40 backdrop-blur-sm z-40 md:hidden"
-                            onClick={() => setIsMobileMenuOpen(false)}
-                        />
-                        
-                        {/* COMPACT SIDEBAR */}
-                        <motion.div
-                            ref={mobileMenuRef}
-                            initial={{ x: "100%" }}
-                            animate={{ x: 0 }}
-                            exit={{ x: "100%" }}
-                            transition={{
-                                type: "spring",
-                                stiffness: 300,
-                                damping: 30,
+                    {/* OVERLAY - Dibuat sangat ringan untuk performa mobile */}
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+                        className="fixed inset-0 bg-black/40 dark:bg-black/60 backdrop-blur-[2px] z-40 md:hidden"
+                        onClick={() => {
+                        setIsMobileMenuOpen(false);
+                        setOpenLang(false);
+                        }}
+                    />
+
+                    {/* COMPACT SIDEBAR */}
+                    <motion.div
+                        ref={mobileMenuRef}
+                        initial={{ x: "100%" }}
+                        animate={{ x: 0 }}
+                        exit={{ x: "100%" }}
+                        transition={{
+                        duration: 0.5,
+                        ease: [0.25, 0.1, 0.25, 1], // Kurva premium se-smooth komponen Skills
+                        }}
+                        style={{ willChange: "transform" }}
+                        className="fixed top-0 right-0 h-full w-72 z-50 md:hidden bg-white dark:bg-slate-900 border-l border-slate-200 dark:border-slate-800 shadow-2xl flex flex-col"
+                    >
+                        {/* HEADER */}
+                        <div className="p-4 border-b border-slate-200 dark:border-slate-800">
+                        <div className="flex items-center justify-between">
+                            <motion.div 
+                            initial={{ opacity: 0, x: 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.1, duration: 0.4 }}
+                            className="flex items-center gap-2"
+                            >
+                            <img src={logo} alt="logo" className="w-8 h-8 object-cover rounded-full shadow-sm" />
+                            <h2 className="text-lg font-bold text-slate-900 dark:text-white">
+                                Warsa
+                            </h2>
+                            </motion.div>
+                            <button
+                            onClick={() => {
+                                setIsMobileMenuOpen(false);
+                                setOpenLang(false);
                             }}
-                            className="fixed top-0 right-0 h-full w-72 z-50 md:hidden bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-l border-slate-200 dark:border-slate-800 shadow-2xl"
+                            className="p-1.5 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                            >
+                            <X size={22} />
+                            </button>
+                        </div>
+                        </div>
+
+                        {/* CONTENT AREA */}
+                        <div className="flex-1 overflow-y-auto p-4 flex flex-col">
+                        {/* MENU ITEMS - Stagger Effect */}
+                        <motion.ul 
+                            initial="hidden"
+                            animate="show"
+                            variants={{
+                            hidden: { opacity: 0 },
+                            show: {
+                                opacity: 1,
+                                transition: { staggerChildren: 0.05, delayChildren: 0.2 }
+                            }
+                            }}
+                            className="space-y-1.5"
                         >
-                            {/* HEADER - Lebih compact */}
-                            <div className="p-4 border-b border-slate-200 dark:border-slate-800">
-                                <div className="flex items-center justify-between">
-                                    <div className="flex items-center gap-2">
-                                        <img
-                                            src={logo}
-                                            alt="logo"
-                                            className="w-8 h-8 object-cover rounded-full"
-                                        />
-                                        <h2 className="text-lg font-bold text-slate-900 dark:text-white">
-                                            Warsa
-                                        </h2>
-                                    </div>
-                                    <button
-                                        onClick={() => setIsMobileMenuOpen(false)}
-                                        className="p-1.5 -m-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
-                                    >
-                                        <X size={20} />
-                                    </button>
+                            {menuItems.map((item) => (
+                            <motion.li 
+                                key={item.id}
+                                variants={{
+                                hidden: { opacity: 0, x: 15 },
+                                show: { opacity: 1, x: 0 }
+                                }}
+                            >
+                                <button
+                                onClick={() => scrollToSection(item.id)}
+                                className={`w-full text-left px-4 py-3 rounded-xl flex items-center gap-3 transition-all duration-300 group ${
+                                    activeSection === item.id
+                                    ? "bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-900/40 font-semibold"
+                                    : "text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/40 hover:text-emerald-500"
+                                }`}
+                                >
+                                <div className={`w-1.5 h-1.5 rounded-full transition-transform duration-300 ${
+                                    activeSection === item.id ? "bg-emerald-500 scale-125 shadow-[0_0_8px_rgba(16,185,129,0.5)]" : "bg-slate-300 dark:bg-slate-600 group-hover:bg-emerald-500"
+                                }`} />
+                                <span className="text-[15px]">
+                                    {t[item.key]}
+                                </span>
+                                </button>
+                            </motion.li>
+                            ))}
+                        </motion.ul>
+
+                        <div className="mt-auto pt-6">
+                            <motion.div 
+                            initial={{ scaleX: 0, opacity: 0 }}
+                            animate={{ scaleX: 1, opacity: 1 }}
+                            transition={{ delay: 0.4 }}
+                            className="mb-6 h-px bg-slate-200 dark:bg-slate-800 origin-left" 
+                            />
+
+                            {/* FOOTER CONTROLS */}
+                            <motion.div 
+                            initial={{ opacity: 0, y: 15 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.5 }}
+                            className="space-y-3"
+                            >
+                            {/* LANGUAGE SELECTOR */}
+                            <div className="relative lang-dropdown">
+                                <button
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    setOpenLang(!openLang);
+                                }}
+                                className={`w-full px-4 py-3 bg-slate-50 dark:bg-slate-800/40 border rounded-xl flex items-center justify-between text-slate-700 dark:text-slate-200 transition-all duration-300 ${
+                                    openLang ? "border-emerald-500 ring-2 ring-emerald-500/10" : "border-slate-200 dark:border-slate-700"
+                                }`}
+                                >
+                                <div className="flex items-center gap-2.5">
+                                    <Globe size={18} className={openLang ? "text-emerald-500" : "text-slate-400"} />
+                                    <span className="font-medium text-sm">{lang.toUpperCase()}</span>
                                 </div>
-                            </div>
+                                <ChevronDown size={16} className={`transition-transform duration-300 ${openLang ? 'rotate-180' : ''}`} />
+                                </button>
 
-                            {/* MENU ITEMS - Lebih compact */}
-                            <div className="p-4">
-                                <ul className="space-y-2">
-                                    {menuItems.map((item) => (
-                                        <li key={item.id}>
-                                            <button
-                                                onClick={() => scrollToSection(item.id)}
-                                                className={`w-full text-left px-4 py-3 rounded-xl transition-all duration-300 flex items-center gap-2 group ${
-                                                    activeSection === item.id
-                                                        ? "bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800 font-semibold shadow-sm"
-                                                        : "text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-emerald-500 border border-transparent"
-                                                }`}
-                                            >
-                                                <div className="w-1.5 h-1.5 rounded-full bg-current opacity-60 group-hover:opacity-100 transition-opacity flex-shrink-0" />
-                                                <span className="font-medium">{t[item.key]}</span>
-                                            </button>
-                                        </li>
-                                    ))}
-                                </ul>
-
-                                {/* DIVIDER */}
-                                <div className="my-4 h-px bg-slate-200 dark:bg-slate-700" />
-
-                                {/* LANGUAGE & THEME - Compact */}
-                                <div className="space-y-2">
-                                    {/* LANGUAGE */}
-                                    <div className="lang-dropdown">
+                                <AnimatePresence>
+                                {openLang && (
+                                    <motion.div
+                                    initial={{ opacity: 0, height: 0, y: 4 }}
+                                    animate={{ opacity: 1, height: "auto", y: 0 }}
+                                    exit={{ opacity: 0, height: 0, y: 4 }}
+                                    className="absolute bottom-full mb-2 w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-2xl z-[60] overflow-hidden"
+                                    >
+                                    <div className="py-1.5 px-1.5">
+                                        {[
+                                        { code: "en", label: "English" },
+                                        { code: "id", label: "Indonesia" },
+                                        { code: "jp", label: "日本語" },
+                                        { code: "ar", label: "العربية" },
+                                        { code: "sas", label: "Sasak" }
+                                        ].map((item) => (
                                         <button
-                                            onClick={() => setOpenLang(!openLang)}
-                                            className="w-full px-4 py-3 text-left border border-slate-200 dark:border-slate-700 rounded-xl flex items-center justify-between text-sm text-slate-600 dark:text-slate-300 hover:text-emerald-500 hover:border-emerald-500 transition-all duration-200 group"
+                                            key={item.code}
+                                            onClick={(e) => {
+                                            e.stopPropagation();
+                                            setLang(item.code as any);
+                                            setOpenLang(false);
+                                            }}
+                                            className={`w-full flex items-center justify-between px-3 py-2.5 my-0.5 rounded-lg text-sm transition-colors ${
+                                            lang === item.code
+                                                ? "bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 font-semibold"
+                                                : "text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/50"
+                                            }`}
                                         >
-                                            <div className="flex items-center gap-2">
-                                                <Globe size={16} className="group-hover:scale-110 transition-transform flex-shrink-0" />
-                                                <span className="font-medium">{lang.toUpperCase()}</span>
-                                            </div>
+                                            {item.label}
+                                            {lang === item.code && <Check size={16} className="text-emerald-500" />}
                                         </button>
-
-                                        <AnimatePresence>
-                                            {openLang && (
-                                                <motion.div
-                                                    initial={{ opacity: 0, y: 8, scale: 0.95 }}
-                                                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                                                    exit={{ opacity: 0, y: 8, scale: 0.95 }}
-                                                    transition={{ duration: 0.15 }}
-                                                    className="mt-2 w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg overflow-hidden"
-                                                >
-                                                    {[
-                                                        { code: "en", label: "English" },
-                                                        { code: "id", label: "Indonesia" },
-                                                        { code: "jp", label: "日本語" },
-                                                        { code: "ar", label: "العربية" },
-                                                        { code: "sas", label: "Sasak" }
-                                                    ].map((item) => (
-                                                        <button
-                                                            key={item.code}
-                                                            type="button"
-                                                            onClick={(e) => {
-                                                                e.stopPropagation();
-                                                                setLang(item.code as "en" | "id" | "jp" | "ar" | "sas");
-                                                                setOpenLang(false);
-                                                            }}
-                                                            className={`w-full flex items-center justify-between px-4 py-2.5 text-sm transition-all ${
-                                                                lang === item.code
-                                                                    ? "bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 font-medium"
-                                                                    : "text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700"
-                                                            }`}
-                                                        >
-                                                            {item.label}
-                                                            {lang === item.code && <Check size={16} />}
-                                                        </button>
-                                                    ))}
-                                                </motion.div>
-                                            )}
-                                        </AnimatePresence>
+                                        ))}
                                     </div>
-
-                                    {/* THEME TOGGLE */}
-                                    <button
-                                        onClick={toggleTheme}
-                                        className="w-full flex items-center justify-between px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-emerald-500 hover:border-emerald-500 transition-all duration-200 group"
-                                    >
-                                        <div className="flex items-center gap-2">
-                                            <div className="p-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 group-hover:bg-emerald-100 dark:group-hover:bg-emerald-900/20 transition-all">
-                                                {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
-                                            </div>
-                                            <span className="font-medium">Theme</span>
-                                        </div>
-                                    </button>
-                                </div>
+                                    </motion.div>
+                                )}
+                                </AnimatePresence>
                             </div>
-                        </motion.div>
+
+                            {/* THEME TOGGLE */}
+                            <button
+                                onClick={toggleTheme}
+                                className="w-full flex items-center justify-between px-4 py-3 bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-700 dark:text-slate-200 hover:border-emerald-500 transition-all group"
+                            >
+                                <div className="flex items-center gap-2.5">
+                                <div className="p-1.5 rounded-lg bg-white dark:bg-slate-700 shadow-sm text-slate-500 dark:text-slate-400 group-hover:text-emerald-500 transition-colors">
+                                    {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+                                </div>
+                                <span className="font-medium text-sm">Mode {theme === 'dark' ? 'Terang' : 'Gelap'}</span>
+                                </div>
+                            </button>
+                            </motion.div>
+                        </div>
+                        </div>
+                    </motion.div>
                     </>
                 )}
             </AnimatePresence>
