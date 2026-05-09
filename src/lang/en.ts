@@ -10,6 +10,9 @@ export const en = {
         skills: "Skills",
         projects: "Projects",
         contact: "Contact",
+
+        themeLight: "Light Mode",
+        themeDark: "Dark Mode",
     },
     // hero
     hero: {

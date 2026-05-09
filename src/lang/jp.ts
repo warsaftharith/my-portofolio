@@ -10,6 +10,9 @@ export const jp = {
         skills: "スキル",
         projects: "プロジェクト",
         contact: "連絡先",
+
+        themeLight: "ライトモード",
+        themeDark: "ダークモード",
     },
 
     // hero

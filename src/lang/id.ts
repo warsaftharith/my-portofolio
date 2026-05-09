@@ -10,6 +10,9 @@ export const id = {
         skills: "Skill",
         projects: "Proyek",
         contact: "Kontak",
+
+        themeLight: "Mode Terang",
+        themeDark: "Mode Gelap",
     },
     // hero
     hero: {

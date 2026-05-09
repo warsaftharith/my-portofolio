@@ -479,7 +479,9 @@ const Navbar = () => {
                                 <div className="p-1.5 rounded-lg bg-white dark:bg-slate-700 shadow-sm text-slate-500 dark:text-slate-400 group-hover:text-emerald-500 transition-colors">
                                     {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
                                 </div>
-                                <span className="font-medium text-sm">Mode {theme === 'dark' ? 'Terang' : 'Gelap'}</span>
+                                <span className="font-medium text-sm">
+                                    {theme === "dark" ? t.themeLight : t.themeDark}
+                                </span>
                                 </div>
                             </button>
                             </motion.div>

@@ -10,6 +10,9 @@ export const sas = {
     skills: 'Kemampuan',
     projects: 'Proyek',
     contact: 'Kontak',
+
+    themeLight: "Mode Terang",
+    themeDark: "Mode Peteng",
   },
 
   // Hero

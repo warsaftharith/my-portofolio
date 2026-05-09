@@ -10,6 +10,9 @@ export const ar = {
         skills: "المهارات",
         projects: "المشاريع",
         contact: "اتصل",
+
+        themeLight: "الوضع الفاتح",
+        themeDark: "الوضع الداكن",
     },
 
     // hero
