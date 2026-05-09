@@ -38,7 +38,7 @@ function Layout({ children }: { children: React.ReactNode }) {
       <button
         onClick={scrollToTop}
         className={`
-          fixed bottom-5 right-5 z-50
+          fixed bottom-5 right-5 z-1
           p-3 rounded-full
           bg-black text-white
           dark:bg-white dark:text-black

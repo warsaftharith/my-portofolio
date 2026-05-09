@@ -304,7 +304,6 @@ const Navbar = () => {
             <AnimatePresence mode="wait">
                 {isMobileMenuOpen && (
                     <>
-                    {/* OVERLAY - Dibuat sangat ringan untuk performa mobile */}
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -325,7 +324,7 @@ const Navbar = () => {
                         exit={{ x: "100%" }}
                         transition={{
                         duration: 0.5,
-                        ease: [0.25, 0.1, 0.25, 1], // Kurva premium se-smooth komponen Skills
+                        ease: [0.25, 0.1, 0.25, 1], 
                         }}
                         style={{ willChange: "transform" }}
                         className="fixed top-0 right-0 h-full w-72 z-50 md:hidden bg-white dark:bg-slate-900 border-l border-slate-200 dark:border-slate-800 flex flex-col"
