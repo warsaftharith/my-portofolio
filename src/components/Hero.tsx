@@ -49,32 +49,20 @@ import { sas } from "../lang/sas";
     useEffect(() => {
         let timeout: ReturnType<typeof setTimeout>;
 
-        // selesai ngetik → masuk mode delete
-        if (!deleting && index === fullText.length) {
-        timeout = setTimeout(() => {
-            setDeleting(true);
-        }, 1500);
-        }
-
-        // DELETE mode
-        else if (deleting && index > 0) {
-        timeout = setTimeout(() => {
-            setText((prev) => prev.slice(0, -1));
-            setIndex((prev) => prev - 1);
-        }, 40);
-        }
-
-        // TYPE mode
-        else if (!deleting && index < fullText.length) {
-        timeout = setTimeout(() => {
-            setText((prev) => prev + fullText.charAt(index));
-            setIndex((prev) => prev + 1);
-        }, 60);
-        }
-
-        // reset cycle
-        else if (deleting && index === 0) {
-        setDeleting(false);
+        if (!deleting && index < fullText.length) {
+            timeout = setTimeout(() => {
+            setIndex((i) => i + 1);
+            setText(fullText.slice(0, index + 1)); 
+            }, 60);
+        } else if (deleting && index > 0) {
+            timeout = setTimeout(() => {
+            setIndex((i) => i - 1);
+            setText(fullText.slice(0, index - 1));
+            }, 40);
+        } else if (!deleting && index === fullText.length) {
+            timeout = setTimeout(() => setDeleting(true), 1500);
+        } else if (deleting && index === 0) {
+            setDeleting(false);
         }
 
         return () => clearTimeout(timeout);
