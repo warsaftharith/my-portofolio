@@ -1,13 +1,13 @@
 import { useState, useRef, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Globe, Check, Menu, X, Sun, Moon,ChevronDown } from "lucide-react";
-import { useTheme } from "../context/ThemeContext";
-import { en } from "../lang/en";
-import { id } from "../lang/id";
-import { jp } from "../lang/jp";
-import { ar } from "../lang/ar";
-import { sas } from "../lang/sas";
-import { useLang } from "../context/LangContext";
+import { useTheme } from "../../context/ThemeContext";
+import { en } from "../../lang/en";
+import { id } from "../../lang/id";
+import { jp } from "../../lang/jp";
+import { ar } from "../../lang/ar";
+import { sas } from "../../lang/sas";
+import { useLang } from "../../context/LangContext";
 import logo from "@/assets/profile.jpeg";
 
 type MenuKey = "home" | "about" | "skills" | "projects" | "contact";
@@ -277,7 +277,7 @@ const Navbar = () => {
                         </li>
                     </ul>
 
-                    {/* MOBILE HAMBURGER BUTTON */}
+                    {/* MOBILE BUTTON */}
                     <button
                         className="md:hidden p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:text-emerald-500 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all duration-200 mobile-menu-toggle"
                         onClick={(e) => {
@@ -357,7 +357,6 @@ const Navbar = () => {
 
                         {/* CONTENT AREA */}
                         <div className="flex-1 overflow-y-auto p-4 flex flex-col">
-                        {/* MENU ITEMS - Stagger Effect */}
                         <motion.ul 
                             initial="hidden"
                             animate="show"

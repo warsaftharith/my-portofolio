@@ -1,10 +1,10 @@
 import { motion, type Variants } from "framer-motion";
-import { useLang } from "../context/LangContext";
-import { en } from "../lang/en";
-import { id } from "../lang/id";
-import { jp } from "../lang/jp";
-import { ar } from "../lang/ar";
-import { sas } from "../lang/sas";
+import { useLang } from "../../context/LangContext";
+import { en } from "../../lang/en";
+import { id } from "../../lang/id";
+import { jp } from "../../lang/jp";
+import { ar } from "../../lang/ar";
+import { sas } from "../../lang/sas";
 
 const container: Variants = {
   hidden: {},

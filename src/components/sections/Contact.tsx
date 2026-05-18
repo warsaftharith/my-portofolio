@@ -3,12 +3,12 @@ import { motion, type Variants } from "framer-motion";
 import { SiGithub, SiTiktok } from "react-icons/si";
 import { HiOutlineMail, HiOutlineChatAlt2 } from "react-icons/hi";
 import { FaLinkedin } from "react-icons/fa";
-import { useLang } from "../context/LangContext";
-import { en } from "../lang/en";
-import { id } from "../lang/id";
-import { jp } from "../lang/jp";
-import { ar } from "../lang/ar";
-import { sas } from "../lang/sas";
+import { useLang } from "../../context/LangContext";
+import { en } from "../../lang/en";
+import { id } from "../../lang/id";
+import { jp } from "../../lang/jp";
+import { ar } from "../../lang/ar";
+import { sas } from "../../lang/sas";
 
 // ================== VARIANTS ==================
 const fadeUp: Variants = {

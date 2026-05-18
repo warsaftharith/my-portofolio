@@ -1,13 +1,13 @@
 import { useState } from "react";
 
-import Layout from "./components/Layout";
-import Hero from "./components/Hero";
-import About from "./components/About";
-import Skills from "./components/Skills";
-import Projects from "./components/Projects";
-import Experience from "./components/Experience";
-import Contact from "./components/Contact";
-import LoadingScreen from "./components/LoadingScreen.tsx";
+import Layout from "./components/layout/Layout.tsx";
+import Hero from "./components/sections/Hero.tsx";
+import About from "./components/sections/About.tsx";
+import Skills from "./components/sections/Skills.tsx";
+import Projects from "./components/sections/Projects.tsx";
+import Experience from "./components/sections/Experience.tsx";
+import Contact from "./components/sections/Contact.tsx";
+import LoadingScreen from "./components/sections/LoadingScreen.tsx";
 
 // analys
 import { Analytics } from "@vercel/analytics/react";

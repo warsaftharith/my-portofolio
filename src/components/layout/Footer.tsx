@@ -1,11 +1,11 @@
 import { FaLinkedin } from "react-icons/fa";
 import { SiTiktok, SiGithub } from "react-icons/si";
-import { useLang } from "../context/LangContext";
-import { en } from "../lang/en";
-import { id } from "../lang/id";
-import { jp } from "../lang/jp";
-import { ar } from "../lang/ar";
-import { sas } from "../lang/sas";
+import { useLang } from "../../context/LangContext";
+import { en } from "../../lang/en";
+import { id } from "../../lang/id";
+import { jp } from "../../lang/jp";
+import { ar } from "../../lang/ar";
+import { sas } from "../../lang/sas";
 
 const Footer = () => {
   const { lang } = useLang();
