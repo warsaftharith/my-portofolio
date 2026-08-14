@@ -1,5 +1,9 @@
 import { FaLinkedin } from "react-icons/fa";
-import { SiTiktok, SiGithub } from "react-icons/si";
+import {
+  SiGithub,
+  SiTiktok,
+  SiInstagram,
+} from "react-icons/si";
 import { useLang } from "../../context/LangContext";
 import { en } from "../../lang/en";
 import { id } from "../../lang/id";
@@ -25,6 +29,11 @@ const Footer = () => {
       name: "GitHub",
       icon: <SiGithub />,
       url: "https://github.com/warsaftharith",
+    },
+    {
+      name: "Instagram",
+      icon: <SiInstagram />,
+      url: "https://instagram.com/warsaftharith",
     },
     {
       name: "LinkedIn",

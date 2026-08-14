@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, type Variants } from "framer-motion";
-import { SiGithub, SiTiktok } from "react-icons/si";
+import { SiGithub, SiInstagram, SiTiktok } from "react-icons/si";
 import { HiOutlineMail, HiOutlineChatAlt2 } from "react-icons/hi";
 import { FaLinkedin } from "react-icons/fa";
 import { useLang } from "../../context/LangContext";
@@ -58,6 +58,7 @@ const Contact = () => {
   const socials = [
     { name: "GitHub", icon: <SiGithub />, url: "https://github.com/warsaftharith" },
     { name: "LinkedIn", icon: <FaLinkedin />, url: "https://linkedin.com/in/lm-wahyu-akbar-sakti-182658360" },
+    { name: "Instagram", icon: <SiInstagram />, url: "https://instagram.com/warsaftharith" },
     { name: "TikTok", icon: <SiTiktok />, url: "https://tiktok.com/@anak.kuliahan" },
   ];
 

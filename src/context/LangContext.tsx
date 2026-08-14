@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
 /**
- * 🔥 Daftar bahasa cukup ditambah di sini saja
+ * Daftar bahasa ditambah 
  */
 export const LANGUAGES = ["en", "id", "jp", "ar", "sas"] as const;
 
@@ -22,7 +22,7 @@ const isValidLang = (value: string | null): value is Lang => {
 };
 
 export const LangProvider = ({ children }: { children: React.ReactNode }) => {
-  const [lang, setLangState] = useState<Lang>("jp"); // default fallback
+  const [lang, setLangState] = useState<Lang>("en"); // default fallback
 
   /**
    * ambil dari localStorage saat pertama load
@@ -33,8 +33,8 @@ export const LangProvider = ({ children }: { children: React.ReactNode }) => {
     if (isValidLang(savedLang)) {
       setLangState(savedLang);
     } else {
-      setLangState("jp"); // default kalau belum ada / invalid
-      localStorage.setItem("lang", "jp");
+      setLangState("en"); 
+      localStorage.setItem("lang", "en");
     }
   }, []);
 
