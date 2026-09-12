@@ -22,9 +22,202 @@ export const sas = {
     subtitle: 'Pengembang Fullstack & Desainer UI/UX',
     desc: 'Nggawe solusi digital saq kokoh, fungsional, dait estetik, fokus leq React dait Laravel. Bukaq kanggo jasa pembuatan website dait kerjasama.',
     contact: 'Hubungi Tiang',
+    pricelist: 'Lihat Daftar Harga',
     cv: 'Unduh CV',
+
+    stats: [
+      {
+        value: '2+',
+        title: 'Taun Pengalaman',
+        subtitle: 'Pengembangan Web',
+      },
+      {
+        value: '15+',
+        title: 'Proyek Saq Wah selese',
+        subtitle: 'Website dait Aplikasi',
+      },
+      {
+        value: '10+',
+        title: 'Teknologi',
+        subtitle: 'Frontend dait Backend',
+      },
+      {
+        value: '100%',
+        title: 'Komitmen',
+        subtitle: 'Kualitas Saq Solah',
+      },
+    ],
+    onlineFor: 'Website sampun online selame',
+    days: 'Jelo',
+    hours: 'Jam',
+    minutes: 'Menit',
+    seconds: 'Detik',
+    since: 'Saking',
   },
 
+  // Promo Jasa Skripsi
+  layout: {
+      promoLabel: "PROMO JASA",
+      promoTitle: "Butuh Bantuan Skripsi?",
+      promoDescription:
+          "Selain pembuatan website, ite jua melayani jasa",
+      proposal: "Proposal",
+      skripsi: "Skripsi",
+      jurnal: "Jurnal",
+      ppt: "PPT Seminar",
+      promoDescriptionEnd:
+          "dait revisi dokumen akademik.",
+      promoButton: "Lihat Detail Jasa",
+  },
+
+  // Daftar Harga
+    pricelist: {
+      badge: "Pilih Paket",
+      // title: "Daftar Harga Jasa Pembuatan Website",
+      subtitle:
+          "Pilih paket saq paling cocok kadu kebutuhan side. Tiap project ite tetep bisa disesuaike kadu kebutuhan khusus.",
+
+      button: "Mulai Jaq",
+      popular: "Rekomendasi",
+      normalPrice: "Harga Normal",
+
+      note:
+          "Harga niki harga awal dait bisa berubah tergantung kompleksitas dait kebutuhan project.",
+
+      tabs: {
+          personal: "Personal",
+          business: "Business",
+      },
+
+      plans: {
+        personal: [
+          {
+            name: "Paket Basic",
+            price: "Rp 199.000",
+            oldPrice: "Rp 499.000",
+            description:
+                "Website personal, CV online, portofolio, atawa brand static.",
+            whatsappMessage:
+                "Halo Warsa, tiang tertarik kadu Paket Basic seharga Rp 199.000. Tiang ingin mengetahui detail dait cara pemesanannya.",
+            features: [
+                "Custom Subdomain",
+                "Hosting",
+                "Responsive",
+                "1 Halaman",
+                "Basic SEO",
+                "Deployment",
+                "Penyimpanan 1GB",
+                "RAM 512MB",
+            ],
+          },
+          {
+            name: "Paket Pro",
+            price: "Rp 1.999.000",
+            oldPrice: "Rp 2.499.000",
+            description:
+                "Website profesional saq fitur lengkap dait menggunakan database.",
+            popular: true,
+            whatsappMessage:
+                "Halo Warsa, tiang tertarik kadu Paket Pro seharga Rp 1.999.000. Tiang ingin mengetahui detail fitur dait cara pemesanannya.",
+            features: [
+                "Custom Domain",
+                "Responsive Design",
+                "Hosting",
+                "Database MySQL & PostgreSQL",
+                "SEO",
+                "Deployment",
+                "Penyimpanan 10GB",
+                "RAM 1GB",
+            ],
+          },
+          {
+            name: "Personal Custom",
+            price: "Rp 2.999.000",
+            oldPrice: "Rp 3.999.000",
+            description:
+                "Website personal saq disesuaike kadu kebutuhan side dait dukungan teknis.",
+            whatsappMessage:
+                "Halo Warsa, tiang tertarik kadu Personal Custom seharga Rp 2.999.000. Tiang ingin konsultasi mengenai kebutuhan website tiang.",
+            features: [
+                "Custom Design",
+                "Unlimited Section",
+                "React",
+                "Optimasi",
+                "SEO",
+                "Database MySQL & PostgreSQL",
+                "Deployment",
+                "Penyimpanan 20GB",
+                "RAM 2GB",
+            ],
+          },
+        ],
+
+        business: [
+          {
+            name: "Business Starter",
+            price: "Rp 2.999.000",
+            oldPrice: "Rp 3.999.000",
+            description:
+                "Website company profile profesional kanggo bisnis kecil.",
+            whatsappMessage:
+                "Halo Warsa, tiang tertarik kadu Business Starter seharga Rp 2.999.000. Tiang ingin mengetahui detail dait cara pemesanannya.",
+            features: [
+                "Custom Domain",
+                "Hosting",
+                "5 Halaman",
+                "WhatsApp",
+                "Google Maps",
+                "SEO",
+                "Database MySQL & PostgreSQL",
+                "Deployment",
+                "Penyimpanan 10GB",
+                "RAM 1GB",
+            ],
+          },
+          {
+            name: "Business Pro",
+            price: "Rp 4.999.000",
+            oldPrice: "Rp 5.999.000",
+            popular: true,
+            description:
+                "Website bisnis kadu dashboard admin, kanggo bisnis menengah.",
+            whatsappMessage:
+                "Halo Warsa, tiang tertarik kadu Business Pro seharga Rp 4.999.000. Tiang ingin mengetahui detail fitur dait cara pemesanannya.",
+            features: [
+                "Dashboard",
+                "Login Admin",
+                "Database MySQL & PostgreSQL",
+                "React + Laravel",
+                "Deployment",
+                "Penyimpanan 50GB",
+                "RAM 16GB",
+            ],
+          },
+          {
+            name: "Enterprise",
+            price: "Custom",
+            description:
+                "Aplikasi web saq disesuaike kadu kebutuhan perusahaan, kanggo bisnis besar.",
+            whatsappMessage:
+                "Halo Warsa, tiang tertarik kadu paket Enterprise. Tiang ingin konsultasi mengenai kebutuhan aplikasi web kanggo perusahaan tiang dait mengetahui detail paketnya.",
+            features: [
+                "Custom domain, subdomain, dait SSL sesuai kebutuhan perusahaan",
+                "Unlimited Fitur",
+                "Database MySQL & PostgreSQL",
+                "API Integration",
+                "Authentication",
+                "Role Management",
+                "Custom Design & UI/UX",
+                "Custom Optimasi & SEO",
+                "Customer Support 24/7 & Maintenance selama 1 tahun",
+                "Deployment",
+                "Penyimpanan 100GB",
+                "RAM 32GB",
+            ],
+          },
+        ],
+      },
+  },
   // Pengalaman
   experience: {
     title: 'Pengalaman & Pendidikan',

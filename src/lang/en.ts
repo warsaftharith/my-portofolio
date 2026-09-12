@@ -21,7 +21,217 @@ export const en = {
         subtitle: "Fullstack Developer & UI/UX Designer",
         desc: "Building stable, functional, and aesthetic digital solutions with a focus on React and Laravel. Open to website development services and collaborations.",
         contact: "Get in Touch",
+        pricelist: "View Pricelist",
         cv: "Download CV",
+
+        stats: [
+            {
+                value: "2+",
+                title: "Years Experience",
+                subtitle: "Web Development",
+            },
+            {
+                value: "15+",
+                title: "Projects Completed",
+                subtitle: "Websites & Applications",
+            },
+            {
+                value: "10+",
+                title: "Technologies",
+                subtitle: "Frontend & Backend",
+            },
+            {
+                value: "100%",
+                title: "Commitment",
+                subtitle: "Best Quality",
+            },
+        ],
+        onlineFor: "Website has been online for",
+        days: "Days",
+        hours: "Hours",
+        minutes: "Minutes",
+        seconds: "Seconds",
+        since: "Since",
+    },
+
+    // Promo Jasa Skripsi
+    layout: {
+        promoLabel: "PROMO SERVICES",
+        promoTitle: "Need Thesis Assistance?",
+        promoDescription:
+            "Besides website development, we also offer thesis writing services.",
+        proposal: "Proposal",
+        skripsi: "Thesis",
+        jurnal: "Journal",
+        ppt: "Seminar PPT",
+        promoDescriptionEnd:
+            "and academic document revision.",
+        promoButton: "View Service Details",
+    },
+
+    pricelist: {
+        badge: "Choose Your Plan",
+        // title: "Simple Pricing. Powerful Results.",
+        subtitle:
+            "Choose the package that best fits your needs. Every project can also be customized to your specific requirements.",
+
+        button: "Get Started",
+        popular: "Recommended",
+        normalPrice: "Regular Price",
+
+        note:
+            "Prices are starting rates and may vary depending on project scope, complexity, and requirements.",
+
+        tabs: {
+            personal: "Personal",
+            business: "Business",
+        },
+
+        plans: {
+            personal: [
+                {
+                    name: "Basic Package",
+                    price: "$49",
+                    oldPrice: "$99",
+                    description:
+                        "A personal website, online resume, portfolio, or static brand website.",
+
+                    whatsappMessage:
+                        "Hello Warsa, I'm interested in the Basic Package priced at $49. I'd like to know more about the details and ordering process.",
+
+                    features: [
+                        "Custom Subdomain",
+                        "Hosting Included",
+                        "Responsive Design",
+                        "1 Page",
+                        "Basic SEO",
+                        "Deployment",
+                        "1 GB Storage",
+                        "512 MB RAM",
+                    ],
+                },
+
+                {
+                    name: "Pro Package",
+                    price: "$249",
+                    oldPrice: "$329",
+                    description:
+                        "A professional website with advanced features and database support.",
+
+                    popular: true,
+
+                    whatsappMessage:
+                        "Hello Warsa, I'm interested in the Pro Package priced at $249. I'd like to know more about the features and ordering process.",
+
+                    features: [
+                        "Custom Domain",
+                        "Responsive Design",
+                        "Hosting Included",
+                        "MySQL & PostgreSQL Database",
+                        "SEO Optimization",
+                        "Deployment",
+                        "10 GB Storage",
+                        "1 GB RAM",
+                    ],
+                },
+
+                {
+                    name: "Custom Personal",
+                    price: "$399",
+                    oldPrice: "$499",
+                    description:
+                        "A fully customized personal website tailored to your needs with technical support.",
+
+                    whatsappMessage:
+                        "Hello Warsa, I'm interested in the Custom Personal Package priced at $399. I'd like to discuss my website requirements.",
+
+                    features: [
+                        "Custom Design",
+                        "Unlimited Sections",
+                        "React",
+                        "Performance Optimization",
+                        "SEO",
+                        "MySQL & PostgreSQL Database",
+                        "Deployment",
+                        "20 GB Storage",
+                        "2 GB RAM",
+                    ],
+                },
+            ],
+
+            business: [
+                {
+                    name: "Business Starter",
+                    price: "$399",
+                    oldPrice: "$499",
+                    description:
+                        "A professional company profile website for small businesses.",
+
+                    whatsappMessage:
+                        "Hello Warsa, I'm interested in the Business Starter Package priced at $399. I'd like to know more about the details and ordering process.",
+
+                    features: [
+                        "Custom Domain",
+                        "Hosting Included",
+                        "Up to 5 Pages",
+                        "WhatsApp Integration",
+                        "Google Maps",
+                        "SEO Optimization",
+                        "MySQL & PostgreSQL Database",
+                        "Deployment",
+                        "10 GB Storage",
+                        "1 GB RAM",
+                    ],
+                },
+
+                {
+                    name: "Business Pro",
+                    price: "$699",
+                    oldPrice: "$799",
+                    popular: true,
+                    description:
+                        "A business website with an admin dashboard for growing companies.",
+
+                    whatsappMessage:
+                        "Hello Warsa, I'm interested in the Business Pro Package priced at $699. I'd like to know more about the features and ordering process.",
+
+                    features: [
+                        "Admin Dashboard",
+                        "Admin Login",
+                        "MySQL & PostgreSQL Database",
+                        "React + Laravel",
+                        "Deployment",
+                        "50 GB Storage",
+                        "16 GB RAM",
+                    ],
+                },
+
+                {
+                    name: "Enterprise",
+                    price: "Custom Quote",
+                    description:
+                        "A fully customized web application designed for enterprise-level businesses.",
+
+                    whatsappMessage:
+                        "Hello Warsa, I'm interested in the Enterprise Package. I'd like to discuss my company's web application requirements.",
+
+                    features: [
+                        "Custom Domain & SSL",
+                        "Unlimited Features",
+                        "MySQL & PostgreSQL Database",
+                        "API Integration",
+                        "Authentication",
+                        "Role Management",
+                        "Custom UI/UX Design",
+                        "Performance & SEO Optimization",
+                        "1-Year Support & Maintenance",
+                        "Deployment",
+                        "100 GB Storage",
+                        "32 GB RAM",
+                    ],
+                },
+            ],
+        },
     },
     // experiece
     experience: {

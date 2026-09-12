@@ -122,7 +122,7 @@ const Projects = () => {
                     {/* FEATURED BADGE */}
                     {project.featured && (
                         <div className="inline-flex items-center gap-2 bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium mb-5 w-fit">
-                        ⭐ {t.featured}
+                        {t.featured}
                         </div>
                     )}
 
@@ -156,18 +156,26 @@ const Projects = () => {
                     {/* BUTTONS */}
                     <div className="mt-auto flex gap-3 sm:gap-4">
                         <a
-                        href="#"
-                        className="
-                            flex-1 text-center
-                            px-4 py-2 sm:py-3
-                            bg-emerald-500 hover:bg-emerald-600
-                            text-white
+                          href="#"
+                          className="
+                            flex-1
+                            text-center
+                            px-4
+                            py-2
+                            sm:py-3
                             rounded-lg
                             font-medium
-                            transition
+                            bg-slate-900
+                            text-white
+                            hover:bg-slate-800
+                            dark:bg-white
+                            dark:text-slate-900
+                            dark:hover:bg-slate-200
+                            transition-all
+                            duration-300
                             hover:scale-[1.02]
                             active:scale-95
-                        "
+                          "
                         >
                         {t.liveDemo}
                         </a>
