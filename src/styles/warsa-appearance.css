@@ -299,3 +299,20 @@ body:has(#hero.wph-root) .wa-original-navbar ul > li > button[class*="text-emera
   --tw-shadow-color: color-mix(in srgb, var(--wa-accent, #176fe5) 10%, transparent) !important;
 }
 /* END WARSA V3.5.5 */
+
+/* WARSA V3.5.6 — Mobile left dock: keep Appearance fully onscreen. */
+/* On mobile the trigger moves to the right when the dock is on the left.
+   Anchor the PANEL to the right edge of that trigger as well. */
+@media (max-width: 767px) {
+  html[data-wa-nav-mobile="dock"][data-wa-nav-mobile-position="left"] .wa-appearance-panel {
+    left: auto;
+    right: 0;
+    width: min(350px, calc(100vw - 24px));
+    width: min(350px, calc(100dvw - 24px));
+    max-width: calc(100vw - 24px);
+    max-height: min(690px, calc(100dvh - 100px));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+}
+/* END WARSA V3.5.6 */
