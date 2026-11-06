@@ -279,3 +279,23 @@ body:has(#hero.wph-root) .wa-original-navbar ul > li > button[class*="text-emera
   color:var(--wa-accent) !important;
 }
 /* END WARSA V3.5.2 */
+
+/* WARSA V3.5.5 — Price List Accent Sync (scoped, CSS only)
+   Applies to /pricelist only. Default: WARSA blue #176fe5;
+   a custom Appearance preference overrides --wa-accent on <html> immediately. */
+#pricelist [class~="border-emerald-500"] {
+  border-color: var(--wa-accent, #176fe5) !important;
+}
+#pricelist [class~="bg-emerald-500"] {
+  background-color: var(--wa-accent, #176fe5) !important;
+}
+#pricelist [class~="text-emerald-500"] {
+  color: var(--wa-accent, #176fe5) !important;
+}
+#pricelist [class~="bg-emerald-500/10"] {
+  background-color: color-mix(in srgb, var(--wa-accent, #176fe5) 10%, transparent) !important;
+}
+#pricelist [class~="shadow-emerald-500/10"] {
+  --tw-shadow-color: color-mix(in srgb, var(--wa-accent, #176fe5) 10%, transparent) !important;
+}
+/* END WARSA V3.5.5 */
