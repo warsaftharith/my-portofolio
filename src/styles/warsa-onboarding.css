@@ -1,0 +1,117 @@
+/* Guided tour is an isolated overlay. It does not change portfolio layouts or dock styling. */
+.wa-tour-root {position:fixed;inset:0;z-index:2147483000;pointer-events:none;font-family:Inter,system-ui,-apple-system,'Segoe UI',sans-serif;}
+.wa-tour-blanket {position:fixed;inset:0;background:rgba(8,13,26,.72);}
+.wa-tour-spotlight {position:fixed;border-radius:17px;box-shadow:0 0 0 200vmax rgba(8,13,26,.74),0 0 0 3px var(--wa-accent,#10b981),0 0 24px 6px rgba(255,255,255,.10);transition:top .3s cubic-bezier(.2,.8,.2,1),left .3s cubic-bezier(.2,.8,.2,1),width .3s,height .3s;}
+.wa-tour-block {position:fixed;inset:0;pointer-events:auto;background:transparent;}
+.wa-tour-card {position:fixed;pointer-events:auto;max-height:calc(100dvh - 24px);overflow-y:auto;border-radius:22px;background:#fdfdfc;border:1px solid rgba(255,255,255,.5);color:#152136;box-shadow:0 25px 70px rgba(0,0,0,.35);padding:20px;outline:none;scrollbar-width:thin;}
+.wa-tour-top {display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.wa-tour-kicker {font-size:11px;display:inline-flex;align-items:center;gap:7px;letter-spacing:.04em;color:#64748b;font-weight:650;}
+.wa-tour-kicker svg {color:var(--wa-accent,#10b981)}
+.wa-tour-close {width:28px;height:28px;display:grid;place-items:center;background:transparent;border:0;border-radius:9px;color:#64748b;cursor:pointer;}
+.wa-tour-close:hover,.wa-tour-close:focus-visible {background:#e8edf2;}
+.wa-tour-title {margin:13px 0 8px;font-size:20px;line-height:1.22;letter-spacing:-.03em;color:#132032;font-weight:750;}
+.wa-tour-description {color:#536174;line-height:1.6;font-size:13px;min-height:58px;margin:0;}
+.wa-tour-progress {display:flex;gap:5px;margin:17px 0;}
+.wa-tour-progress span {height:4px;flex:1;background:#e2e8f0;border-radius:99px;transition:background-color .2s;}
+.wa-tour-progress span.is-active {background:var(--wa-accent,#10b981);}
+.wa-tour-actions {display:flex;align-items:center;justify-content:space-between;gap:6px;}
+.wa-tour-buttons {display:flex;gap:7px;align-items:center;}
+.wa-tour-skip,.wa-tour-back,.wa-tour-next {border:0;cursor:pointer;font-family:inherit;font-weight:600;font-size:12px;line-height:1.3;display:inline-flex;align-items:center;justify-content:center;gap:5px;min-height:35px;border-radius:11px;padding:9px 11px;white-space:nowrap;}
+.wa-tour-skip {background:transparent;color:#64748b;}
+.wa-tour-back {background:#e9eef3;color:#334155;}
+.wa-tour-next {background:var(--wa-accent,#10b981);color:white;}
+.wa-tour-skip:focus-visible,.wa-tour-back:focus-visible,.wa-tour-next:focus-visible {outline:2px solid var(--wa-accent,#10b981);outline-offset:2px;}
+@media(max-width:390px){.wa-tour-card {padding:15px}.wa-tour-title {font-size:18px}.wa-tour-description {font-size:12px}.wa-tour-skip,.wa-tour-back,.wa-tour-next {padding:8px 9px;font-size:11px}}
+@media(prefers-reduced-motion:reduce){.wa-tour-root *{transition:none!important;animation:none!important}}
+
+/* Match the site’s light/dark theme while keeping a readable tutorial. */
+.wa-tour-root.is-dark .wa-tour-card {background:#141f30;color:#f1f5f9;border-color:rgba(203,213,225,.2);}
+.wa-tour-root.is-dark .wa-tour-title {color:#f8fafc;}
+.wa-tour-root.is-dark .wa-tour-description {color:#cbd5e1;}
+.wa-tour-root.is-dark .wa-tour-kicker {color:#9daec1;}
+.wa-tour-root.is-dark .wa-tour-close {color:#cbd5e1;}
+.wa-tour-root.is-dark .wa-tour-close:hover {background:#26344a;}
+.wa-tour-root.is-dark .wa-tour-back {background:#26344a;color:#e2e8f0;}
+.wa-tour-root.is-dark .wa-tour-skip {color:#cbd5e1;}
+.wa-tour-root.is-dark .wa-tour-progress span:not(.is-active) {background:#334155;}
+
+/* ============================================================================
+   WARSA Tutorial Color Sync V1
+   Integrates onboarding colors with Appearance without modifying tour behavior.
+   --wa-accent, --wa-heading, --wa-body, --wa-muted, --wa-background-color
+   are already managed by AppearanceControl.tsx on the document root.
+   Default accent matches WARSA profile hero fallback: #176fe5.
+   ============================================================================ */
+.wa-tour-root {
+  --wa-tour-accent: var(--wa-accent, #176fe5);
+  --wa-tour-surface: #ffffff;
+  --wa-tour-heading: var(--wa-heading, #0f172a);
+  --wa-tour-body: var(--wa-body, #475569);
+  --wa-tour-muted: var(--wa-muted, #64748b);
+  --wa-tour-track: #e2e8f0;
+  --wa-tour-border: rgba(15, 23, 42, .13);
+}
+
+.wa-tour-root.is-dark {
+  --wa-tour-surface: #020617;
+  --wa-tour-heading: var(--wa-heading, #f8fafc);
+  --wa-tour-body: var(--wa-body, #cbd5e1);
+  --wa-tour-muted: var(--wa-muted, #94a3b8);
+  --wa-tour-track: #334155;
+  --wa-tour-border: rgba(203, 213, 225, .18);
+}
+
+.wa-tour-root .wa-tour-card {
+  background: var(--wa-tour-surface);
+  color: var(--wa-tour-heading);
+  border-color: var(--wa-tour-border);
+  transition: background-color .35s ease, border-color .35s ease;
+}
+
+/* Optional custom background is already contrast-constrained by Appearance. */
+html[data-wa-background] .wa-tour-root .wa-tour-card {
+  background: var(--wa-background-color, var(--wa-tour-surface));
+}
+
+.wa-tour-root .wa-tour-title { color: var(--wa-tour-heading); }
+.wa-tour-root .wa-tour-description { color: var(--wa-tour-body); }
+.wa-tour-root .wa-tour-kicker,
+.wa-tour-root .wa-tour-skip,
+.wa-tour-root .wa-tour-close { color: var(--wa-tour-muted); }
+
+.wa-tour-root .wa-tour-kicker svg { color: var(--wa-tour-accent); }
+.wa-tour-root .wa-tour-progress span:not(.is-active) { background: var(--wa-tour-track); }
+.wa-tour-root .wa-tour-progress span.is-active { background: var(--wa-tour-accent); }
+.wa-tour-root .wa-tour-next { background: var(--wa-tour-accent); color: #ffffff; }
+.wa-tour-root .wa-tour-spotlight {
+  box-shadow: 0 0 0 200vmax rgba(8,13,26,.74),
+              0 0 0 3px var(--wa-tour-accent),
+              0 0 24px 6px rgba(255,255,255,.10);
+}
+.wa-tour-root .wa-tour-skip:focus-visible,
+.wa-tour-root .wa-tour-back:focus-visible,
+.wa-tour-root .wa-tour-next:focus-visible {
+  outline-color: var(--wa-tour-accent);
+}
+
+/* The original V3.2 dark-theme rules are more specific than base rules. */
+.wa-tour-root.is-dark .wa-tour-card {
+  background: var(--wa-tour-surface);
+  color: var(--wa-tour-heading);
+  border-color: var(--wa-tour-border);
+}
+.wa-tour-root.is-dark .wa-tour-title { color: var(--wa-tour-heading); }
+.wa-tour-root.is-dark .wa-tour-description { color: var(--wa-tour-body); }
+.wa-tour-root.is-dark .wa-tour-kicker,
+.wa-tour-root.is-dark .wa-tour-skip,
+.wa-tour-root.is-dark .wa-tour-close { color: var(--wa-tour-muted); }
+
+/* Light and dark variants of the secondary action */
+.wa-tour-root .wa-tour-back { background: #e9eef3; color: #334155; }
+.wa-tour-root.is-dark .wa-tour-back { background: #1e293b; color: #e2e8f0; }
+.wa-tour-root.is-dark .wa-tour-close:hover { background: #1e293b; }
+
+@media (prefers-reduced-motion: reduce) {
+  .wa-tour-root .wa-tour-card { transition: none; }
+}
+/* END WARSA Tutorial Color Sync V1 */

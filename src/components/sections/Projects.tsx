@@ -1,209 +1,115 @@
-import { motion, type Variants } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
+import { AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useScroll } from "framer-motion";
+import { ArrowUpRight, X } from "lucide-react";
 import { useLang } from "../../context/LangContext";
 import { en } from "../../lang/en";
 import { id } from "../../lang/id";
 import { jp } from "../../lang/jp";
 import { ar } from "../../lang/ar";
 import { sas } from "../../lang/sas";
+import "../../styles/warsa-project-showcase.css";
 
-const container: Variants = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.12,
-    },
-  },
-};
+const translations = { en: en.projects, id: id.projects, jp: jp.projects, ar: ar.projects, sas: sas.projects };
+const support = {
+  id: { details: "Lihat detail", close: "Tutup detail", technologies: "Teknologi", count: "Karya terpilih", description: "Tentang proyek" },
+  en: { details: "View details", close: "Close details", technologies: "Technologies", count: "Selected work", description: "About this project" },
+} as const;
 
-const card: Variants = {
-  hidden: { opacity: 0, y: 50, scale: 0.96 },
-  show: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      duration: 0.6,
-      ease: [0.25, 0.1, 0.25, 1],
-    },
-  },
-};
-
-const Projects = () => {
+/**
+ * Only this section is replaced. It reuses the existing localized project
+ * content and bundled images; no additional projects or external links.
+ * This section uses a sticky scroll narrative inspired by the provided HTML.
+ */
+export default function Projects() {
   const { lang } = useLang();
-  const translations = {
-    en: en.projects,
-    id: id.projects,
-    jp: jp.projects,
-    ar: ar.projects,
-    sas: sas.projects,
-  };
+  const t = translations[lang];
+  const ui = lang === "id" || lang === "sas" ? support.id : support.en;
+  const target = useRef<HTMLElement>(null);
+  const reducedMotion = useReducedMotion();
+  const [active, setActive] = useState(0);
+  const [detail, setDetail] = useState<number | null>(null);
+  const items = t.items;
+  const { scrollYProgress } = useScroll({ target, offset: ["start start", "end end"] });
 
-  const t = translations[lang as keyof typeof translations];
+  useMotionValueEvent(scrollYProgress, "change", progress => {
+    const next = Math.min(items.length - 1, Math.max(0, Math.floor(progress * items.length)));
+    setActive(previous => previous === next ? previous : next);
+  });
+
+  useEffect(() => {
+    if (detail === null) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setDetail(null); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [detail]);
+
+  const current = items[active];
+  const selected = detail === null ? null : items[detail];
+  const galleryLength = `${Math.max(items.length, 1) * 105}svh`;
 
   return (
-    <section
-      id="projects"
-      className="py-24 sm:py-28 lg:py-32 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-950 transition-colors"
-    >
-        <div className="flex justify-center mb-10 sm:mb-12">
-            <div className="w-[90%] h-[1px] bg-gradient-to-r from-transparent via-slate-300 dark:via-slate-700 to-transparent" />
-        </div>
-        <div className="max-w-7xl mx-auto">
-
-            {/* HEADER */}
-            <motion.div
-            className="text-center mb-14 sm:mb-20"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            viewport={{ once: true, amount: 0.3 }}
-            >
-            <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-slate-900 dark:from-white to-slate-600 dark:to-slate-400 bg-clip-text text-transparent mb-4 sm:mb-6">
-                {t.title}
-            </h2>
-
-            <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-                {t.subtitle}
-            </p>
-            </motion.div>
-
-            {/* GRID */}
-            <motion.div
-            className="
-                grid 
-                grid-cols-1 
-                md:grid-cols-2 
-                xl:grid-cols-3 
-                gap-6 sm:gap-8
-            "
-            variants={container}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-            >
-            {t.items.map((project, index) => (
-                <motion.div
-                key={index}
-                variants={card}
-                className={`group ${index === 1 ? "md:row-span-2" : ""}`}
-                >
-                <div
-                    className="
-                    h-full
-                    flex flex-col
-                    overflow-hidden
-                    rounded-2xl sm:rounded-3xl
-                    bg-white dark:bg-slate-900
-                    border border-slate-200 dark:border-slate-800
-                    shadow-lg hover:shadow-2xl
-                    transition-all duration-500
-                    group-hover:-translate-y-3
-                    "
-                >
-
-                    {/* IMAGE */}
-                    <div className="relative w-full aspect-[16/10] overflow-hidden">
-                    <img
-                        src={project.image}
-                        alt={project.title}
-                        className="
-                        w-full h-full object-cover
-                        group-hover:scale-110
-                        transition-transform duration-700
-                        "
-                    />
-
-                    <div className="absolute inset-0 bg-black/20 dark:bg-black/40 group-hover:bg-black/0 transition-all duration-500" />
-                    </div>
-
-                    {/* CONTENT */}
-                    <div className="p-5 sm:p-6 lg:p-8 flex flex-col flex-1">
-
-                    {/* FEATURED BADGE */}
-                    {project.featured && (
-                        <div className="inline-flex items-center gap-2 bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium mb-5 w-fit">
-                        {t.featured}
-                        </div>
-                    )}
-
-                    {/* TITLE */}
-                    <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-emerald-600 transition-colors">
-                        {project.title}
-                    </h3>
-
-                    {/* DESC */}
-                    <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 mb-5 leading-relaxed">
-                        {project.desc}
-                    </p>
-
-                    {/* TECH */}
-                    <div className="flex flex-wrap gap-2 mb-6">
-                        {project.tech.map((tech, i) => (
-                        <span
-                            key={i}
-                            className="
-                            text-xs sm:text-sm
-                            bg-slate-100 dark:bg-slate-800
-                            text-slate-700 dark:text-slate-200
-                            px-3 py-1 rounded-full
-                            "
-                        >
-                            {tech}
-                        </span>
-                        ))}
-                    </div>
-
-                    {/* BUTTONS */}
-                    <div className="mt-auto flex gap-3 sm:gap-4">
-                        <a
-                          href="#"
-                          className="
-                            flex-1
-                            text-center
-                            px-4
-                            py-2
-                            sm:py-3
-                            rounded-lg
-                            font-medium
-                            bg-slate-900
-                            text-white
-                            hover:bg-slate-800
-                            dark:bg-white
-                            dark:text-slate-900
-                            dark:hover:bg-slate-200
-                            transition-all
-                            duration-300
-                            hover:scale-[1.02]
-                            active:scale-95
-                          "
-                        >
-                        {t.liveDemo}
-                        </a>
-
-                        <a
-                        href="#"
-                        className="
-                            px-4 py-2 sm:py-3
-                            border border-slate-300 dark:border-slate-700
-                            text-slate-800 dark:text-slate-200
-                            rounded-lg
-                            hover:bg-slate-100 dark:hover:bg-slate-800
-                            transition
-                        "
-                        >
-                        {t.github}
-                        </a>
-                    </div>
-
-                    </div>
+    <section id="projects" ref={target} className="wa-project-gallery" style={{ height: galleryLength }} aria-label={t.title}>
+      <div className="wa-project-sticky">
+        <div className="wa-project-inner">
+          <div className="wa-project-info">
+            <div className="wa-project-section-label"><span className="wa-project-tiny-dot" /> {t.title}</div>
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div key={`${lang}-${active}`} className="wa-project-information"
+                initial={reducedMotion ? false : { opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={reducedMotion ? undefined : { opacity: 0, y: -12 }}
+                transition={{ duration: reducedMotion ? 0 : .44, ease: [.2,.8,.2,1] }}>
+                <span className="wa-project-index">{String(active + 1).padStart(2,"0")} / {String(items.length).padStart(2,"0")}</span>
+                <h2>{current.title}</h2>
+                <p>{current.desc}</p>
+                <div className="wa-project-tech" aria-label={ui.technologies}>
+                  {current.tech.map((tech: string) => <span key={tech}>{tech}</span>)}
                 </div>
-                </motion.div>
-            ))}
-            </motion.div>
-
+                <button type="button" className="wa-project-detail-button" onClick={() => setDetail(active)}>
+                  {ui.details}<ArrowUpRight size={17} aria-hidden="true" />
+                </button>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+          <div className="wa-project-image-column">
+            <button type="button" className="wa-project-picture" onClick={() => setDetail(active)} aria-label={`${ui.details}: ${current.title}`}>
+              <AnimatePresence initial={false} mode="sync">
+                <motion.img key={current.image} src={current.image} alt={current.title}
+                  loading={active === 0 ? "eager" : "lazy"} decoding="async"
+                  initial={reducedMotion ? false : { opacity: 0, scale: 1.07, clipPath: "inset(100% 0 0 0)" }}
+                  animate={{ opacity: 1, scale: 1, clipPath: "inset(0 0 0 0)" }}
+                  exit={reducedMotion ? undefined : { opacity: 0, scale: 1.035 }}
+                  transition={{ duration: reducedMotion ? 0 : .8, ease: [.2,.8,.2,1] }}/>
+              </AnimatePresence>
+              <span className="wa-project-corner" aria-hidden="true"><ArrowUpRight size={22}/></span>
+            </button>
+            <div className="wa-project-progress">
+              <span>{String(active + 1).padStart(2,"0")} / {String(items.length).padStart(2,"0")}</span>
+              <div className="wa-project-track"><motion.div className="wa-project-track-fill" style={{ scaleX: scrollYProgress }}/></div>
+              <span>{ui.count}</span>
+            </div>
+          </div>
         </div>
+      </div>
+      {createPortal(<AnimatePresence>
+        {selected && <motion.div className="wa-project-overlay" role="presentation"
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+          transition={{ duration: reducedMotion ? 0 : .25 }} onMouseDown={e => { if(e.target===e.currentTarget) setDetail(null); }}>
+          <motion.div className="wa-project-dialog" role="dialog" aria-modal="true" aria-labelledby="wa-project-dialog-title"
+            initial={reducedMotion ? false : { opacity: 0, y: 28, scale: .97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={reducedMotion ? undefined : { opacity: 0, y: 16, scale: .98 }}
+            transition={{ duration: reducedMotion ? 0 : .35, ease: [.2,.8,.2,1] }}>
+            <button autoFocus type="button" className="wa-project-close" onClick={() => setDetail(null)} aria-label={ui.close}><X size={20}/></button>
+            <img src={selected.image} alt={selected.title} decoding="async" />
+            <span className="wa-project-index">{ui.description}</span>
+            <h3 id="wa-project-dialog-title">{selected.title}</h3>
+            <p>{selected.desc}</p>
+            <div className="wa-project-tech">{selected.tech.map((tech: string) => <span key={tech}>{tech}</span>)}</div>
+          </motion.div>
+        </motion.div>}
+      </AnimatePresence>, document.body)}
     </section>
   );
-};
-
-export default Projects;
+}

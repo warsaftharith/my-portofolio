@@ -9,7 +9,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 
-import Navbar from "./Navbar";
+import AdaptiveNavigation from "./AdaptiveNavigation";
 import Footer from "./Footer";
 
 import { useLang } from "../../context/LangContext";
@@ -103,7 +103,7 @@ function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar />
+      <AdaptiveNavigation />
 
       {/* POPUP PROMO */}
       <AnimatePresence>

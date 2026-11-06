@@ -1,4 +1,4 @@
-import heroImg from "../../assets/profile.jpeg";
+import heroImg from "../../assets/profile.png";
 import { motion, type Variants } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
 import { useLang } from "../../context/LangContext";
@@ -168,11 +168,6 @@ const statIcons = [
             variants={fadeUp}
             className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm"
           >
-            <span className="relative flex h-2 w-2">
-              <span className="absolute h-full w-full rounded-full bg-slate-400 opacity-75 animate-ping dark:bg-slate-500" />
-              <span className="relative h-2 w-2 rounded-full bg-slate-700 dark:bg-white" />
-            </span>
-
             <span className="font-medium text-slate-600 dark:text-slate-300">
               {t.available}
             </span>

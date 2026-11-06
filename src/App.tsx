@@ -1,9 +1,15 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+/* Warsa Appearance — non-invasive patch */
+import AppearanceControl from "./components/appearance/AppearanceControl";
+import { NavigationAppearanceProvider } from "./context/NavigationAppearanceContext";
+import FirstVisitTour from "./components/onboarding/FirstVisitTour";
 
 import Layout from "./components/layout/Layout";
 
 import Hero from "./components/sections/Hero";
+import HeroProfile from "./components/sections/HeroProfile";
+import { useProfileHeroMode } from "./hooks/useProfileHeroMode";
 import About from "./components/sections/About";
 import Skills from "./components/sections/Skills";
 import Projects from "./components/sections/Projects";
@@ -20,9 +26,10 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 
 function HomePage() {
+  const [heroMode] = useProfileHeroMode();
   return (
     <Layout>
-      <Hero />
+      {heroMode === "profile" ? <HeroProfile /> : <Hero />}
       <About />
       <Skills />
       <Projects />
@@ -51,12 +58,17 @@ function App() {
         <LoadingScreen onFinish={() => setLoading(false)} />
       ) : (
         <BrowserRouter>
+          <NavigationAppearanceProvider>
+          {/* Warsa Appearance: floating controls, original layout unchanged */}
+          <AppearanceControl />
+          <FirstVisitTour />
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/pricelist" element={<PriceListPage />} />
             {/* Route for the Skripsi page coming soon */}
             <Route path="/skripsi" element={<Skripsi />} />
           </Routes>
+        </NavigationAppearanceProvider>
         </BrowserRouter>
       )}
 

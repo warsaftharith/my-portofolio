@@ -8,18 +8,18 @@ import { jp } from "../../lang/jp";
 import { ar } from "../../lang/ar";
 import { sas } from "../../lang/sas";
 import { useLang } from "../../context/LangContext";
-import logo from "@/assets/profile.jpeg";
+import logo from "@/assets/profile.png";
 import { useLocation, useNavigate } from "react-router-dom";
 
 type MenuKey = "home" | "about" | "skills" | "projects" | "contact";
 
 const Navbar = () => {
-    const { lang, setLang } = useLang();
+    const { lang, setLang, languagePreference, setLanguagePreference } = useLang();
     const [activeSection, setActiveSection] = useState("hero");
     const [indicator, setIndicator] = useState({ left: 0, width: 0 });
     const [openLang, setOpenLang] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const { theme, toggleTheme } = useTheme();
+    const { theme, toggleTheme, themePreference, setThemePreference } = useTheme();
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -185,7 +185,7 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className="fixed top-0 left-0 w-full z-50 bg-gradient-to-b from-white/80 to-white/0 dark:from-slate-950/80 dark:to-slate-950/0 backdrop-blur">
+            <nav className="wa-original-navbar fixed top-0 left-0 w-full z-50 bg-gradient-to-b from-white/80 to-white/0 dark:from-slate-950/80 dark:to-slate-950/0 backdrop-blur">
                 <div className="max-w-6xl mx-auto w-full px-4 sm:px-6 py-3 flex justify-between items-center">
                     {/* LOGO */}
                     <div className="flex items-center gap-2">
@@ -277,6 +277,19 @@ const Navbar = () => {
                                         transition={{ duration: 0.2 }}
                                         className="absolute right-0 mt-2 w-40 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-xl overflow-hidden z-50"
                                     >
+                                        {/* WARSA_LANG_SYSTEM_V353 — kembali mengikuti bahasa browser */}
+                                        <button type="button"
+                                            onClick={(e) => { e.stopPropagation(); setLanguagePreference("system"); setOpenLang(false); }}
+                                            aria-pressed={languagePreference === "system"}
+                                            className="w-full flex items-center justify-between px-4 py-3 text-sm transition-colors hover:bg-slate-100 dark:hover:bg-slate-700"
+                                            style={languagePreference === "system" ? {
+                                                color: "var(--wa-accent, #176fe5)",
+                                                backgroundColor: "color-mix(in srgb, var(--wa-accent, #176fe5) 10%, transparent)"
+                                            } : undefined}
+                                        >
+                                            <span>{lang === "id" || lang === "sas" ? "Sistem (otomatis)" : lang === "jp" ? "システム (自動)" : lang === "ar" ? "النظام (تلقائي)" : "System (auto)"}</span>
+                                            {languagePreference === "system" && <Check size={16} />}
+                                        </button>
                                         {[
                                             { code: "en", label: "English" },
                                             { code: "id", label: "Indonesia" },
@@ -293,13 +306,13 @@ const Navbar = () => {
                                                     setOpenLang(false);
                                                 }}
                                                 className={`w-full flex items-center justify-between px-4 py-3 text-sm transition-colors ${
-                                                    lang === item.code
+                                                    languagePreference === item.code
                                                         ? "bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400"
                                                         : "text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700"
                                                 }`}
                                             >
                                                 {item.label}
-                                                {lang === item.code && <Check size={16} />}
+                                                {languagePreference === item.code && <Check size={16} />}
                                             </button>
                                         ))}
                                     </motion.div>
@@ -368,7 +381,7 @@ const Navbar = () => {
                         ease: [0.25, 0.1, 0.25, 1], 
                         }}
                         style={{ willChange: "transform" }}
-                        className="fixed top-0 right-0 h-full w-72 z-50 md:hidden bg-white dark:bg-slate-900 border-l border-slate-200 dark:border-slate-800 flex flex-col"
+                        className="wa-original-sidebar fixed top-0 right-0 h-full w-72 z-50 md:hidden bg-white dark:bg-slate-900 border-l border-slate-200 dark:border-slate-800 flex flex-col"
                     >
                         {/* HEADER */}
                         <div className="p-4 border-b border-slate-200 dark:border-slate-800">
@@ -479,6 +492,19 @@ const Navbar = () => {
                                     className="absolute bottom-full mb-2 w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl z-[60] overflow-hidden"
                                     >
                                     <div className="py-1.5 px-1.5">
+                                        {/* WARSA_LANG_SYSTEM_V353 — auto locale */}
+                                        <button type="button"
+                                            onClick={(e) => { e.stopPropagation(); setLanguagePreference("system"); setOpenLang(false); }}
+                                            aria-pressed={languagePreference === "system"}
+                                            className="w-full flex items-center justify-between px-3 py-2.5 my-0.5 rounded-lg text-sm transition-colors hover:bg-slate-100 dark:hover:bg-slate-700/50"
+                                            style={languagePreference === "system" ? {
+                                                color: "var(--wa-accent, #176fe5)",
+                                                backgroundColor: "color-mix(in srgb, var(--wa-accent, #176fe5) 10%, transparent)"
+                                            } : undefined}
+                                        >
+                                            <span>{lang === "id" || lang === "sas" ? "Sistem (otomatis)" : lang === "jp" ? "システム (自動)" : lang === "ar" ? "النظام (تلقائي)" : "System (auto)"}</span>
+                                            {languagePreference === "system" && <Check size={16} />}
+                                        </button>
                                         {[
                                         { code: "en", label: "English" },
                                         { code: "id", label: "Indonesia" },
@@ -494,13 +520,13 @@ const Navbar = () => {
                                             setOpenLang(false);
                                             }}
                                             className={`w-full flex items-center justify-between px-3 py-2.5 my-0.5 rounded-lg text-sm transition-colors ${
-                                            lang === item.code
+                                            languagePreference === item.code
                                                 ? "bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 font-semibold"
                                                 : "text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/50"
                                             }`}
                                         >
                                             {item.label}
-                                            {lang === item.code && <Check size={16} className="text-emerald-500" />}
+                                            {languagePreference === item.code && <Check size={16} className="text-emerald-500" />}
                                         </button>
                                         ))}
                                     </div>
@@ -509,20 +535,23 @@ const Navbar = () => {
                                 </AnimatePresence>
                             </div>
 
-                            {/* THEME TOGGLE */}
-                            <button
-                                onClick={toggleTheme}
-                                className="w-full flex items-center justify-between px-4 py-3 bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-700 dark:text-slate-200 hover:border-emerald-500 transition-all group"
-                            >
-                                <div className="flex items-center gap-2.5">
-                                <div className="p-1.5 rounded-lg bg-white dark:bg-slate-700 shadow-sm text-slate-500 dark:text-slate-400 group-hover:text-emerald-500 transition-colors">
-                                    {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
-                                </div>
-                                <span className="font-medium text-sm">
-                                    {theme === "dark" ? t.themeLight : t.themeDark}
-                                </span>
-                                </div>
-                            </button>
+                            {/* THEME TOGGLE — WARSA_ACCENT_SIDEBAR_V352, light / dark / system */}
+                            <div className="wa-mobile-theme-settings" role="group" aria-label={lang === "en" ? "Theme" : "Tema"}>
+                              <span className="wa-mobile-theme-caption">
+                                {lang === "en" ? "Theme" : lang === "jp" ? "テーマ" : lang === "ar" ? "المظهر" : "Tema"}
+                              </span>
+                              <div className="wa-mobile-theme-segments">
+                                {(["light", "dark", "system"] as const).map((mode) => (
+                                  <button key={mode} type="button" aria-pressed={themePreference === mode}
+                                    onClick={() => setThemePreference(mode)}>
+                                    {lang === "en" ? ({ light: "Light", dark: "Dark", system: "System" }[mode])
+                                     : lang === "jp" ? ({ light: "ライト", dark: "ダーク", system: "システム" }[mode])
+                                     : lang === "ar" ? ({ light: "فاتح", dark: "داكن", system: "النظام" }[mode])
+                                     : ({ light: "Terang", dark: "Gelap", system: "Sistem" }[mode])}
+                                  </button>
+                                ))}
+                              </div>
+                            </div>
                             </motion.div>
                         </div>
                         </div>
