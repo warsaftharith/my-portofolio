@@ -3,6 +3,10 @@ import type { CSSProperties } from "react";
 import { useTheme } from "../../context/ThemeContext";
 import { useLang } from "../../context/LangContext";
 import { motion, AnimatePresence } from "framer-motion";
+// WARSA_V354_ASSET_READINESS — gunakan URL Vite yang sama persis dengan gambar Hero.
+import bannerImage from "../../assets/banner-warsa-profile.png";
+import profileImage from "../../assets/profile.png";
+
 
 /** Read the same stored Appearance palette before AppearanceControl mounts. */
 const isHex = (value: unknown): value is string => typeof value === "string" && /^#[0-9a-fA-F]{6}$/.test(value);
@@ -52,18 +56,73 @@ const LoadingScreen = ({ onFinish }: { onFinish: () => void }) => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          setTimeout(() => onFinish(), 600);
-          return 100;
-        }
-        return prev + 1;
-      });
-    }, 20);
+    let cancelled = false;
+    const timers: number[] = [];
+    const startTime = performance.now();
+    const minimumVisibleMs = 650; 
+    const finalHoldMs = 320;    
+    const perImageTimeoutMs = 30000; 
 
-    return () => clearInterval(interval);
+    // Pilih aset Hero yang benar-benar digunakan pengunjung.
+    let originalHero = false;
+    try {
+      originalHero = localStorage.getItem("warsa-portfolio-profile-hero-mode-v1") === "original";
+    } catch { /* penyimpanan mungkin diblokir; fallback ke Profile + Banner */ }
+    const imageUrls = window.location.pathname === "/"
+      ? (originalHero ? [profileImage] : [bannerImage, profileImage])
+      : [];
+
+    const waitForDecodedImage = (url: string): Promise<boolean> =>
+      new Promise((resolve) => {
+        const img = new Image();
+        img.decoding = "async";
+        img.fetchPriority = "high";
+        let done = false;
+        const settle = (ok: boolean) => {
+          if (done) return;
+          done = true;
+          window.clearTimeout(timeout);
+          img.onload = null;
+          img.onerror = null;
+          resolve(ok);
+        };
+        const timeout = window.setTimeout(() => settle(false), perImageTimeoutMs);
+        img.onload = () => {
+          // onload = jaringan/browser cache selesai; decode = bitmap siap dipakai.
+          void img.decode().catch(() => {}).then(() => settle(img.naturalWidth > 0));
+        };
+        img.onerror = () => settle(false);
+        img.src = url;
+      });
+
+    let completed = 0;
+    void Promise.all(imageUrls.map(async (url) => {
+      const successful = await waitForDecodedImage(url);
+      completed += 1;
+      if (!cancelled) {
+        // Setiap gambar selesai menjadi milestone nyata; 100% hanya setelah semuanya.
+        setProgress(Math.round((completed / imageUrls.length) * 96));
+      }
+      return successful;
+    })).then((results) => {
+      if (cancelled) return;
+      if (results.some((success) => !success)) {
+        console.warn("WARSA loading: salah satu gambar Hero gagal dimuat atau timeout; halaman tetap dibuka agar tidak terjebak di loading.");
+      }
+      const remaining = Math.max(0, minimumVisibleMs - (performance.now() - startTime));
+      timers.push(window.setTimeout(() => {
+        if (cancelled) return;
+        setProgress(100);
+        timers.push(window.setTimeout(() => {
+          if (!cancelled) onFinish();
+        }, finalHoldMs));
+      }, remaining));
+    });
+
+    return () => {
+      cancelled = true;
+      timers.forEach((id) => window.clearTimeout(id));
+    };
   }, [onFinish]);
 
 

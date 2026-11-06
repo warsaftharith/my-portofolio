@@ -17,8 +17,6 @@ const icons = [BriefcaseBusiness, Layers3, Code2, Sparkles];
 const START_DATE = new Date("2020-08-14T00:00:00+07:00").getTime();
 const pad = (value: number) => String(value).padStart(2, "0");
 
-// Motion dibangun dari pola Hero bawaan: stagger tiap elemen, bukan satu blok.
-// Hanya opacity dan transform yang dianimasikan agar layout tidak bergeser.
 const easeOutSoft: [number, number, number, number] = [0.22, 1, 0.36, 1];
 const cardFlow: Variants = {
   hidden: {},
