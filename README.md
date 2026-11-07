@@ -1,77 +1,82 @@
-<<<<<<< HEAD
-# portofolio
-=======
-# React + TypeScript + Vite
+<div align="center">
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<h1>WARSA Developer</h1>
 
-Currently, two official plugins are available:
+<p><strong>Personal Portfolio — Fullstack Developer &amp; UI/UX Designer</strong></p>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+<p>A modern, responsive personal portfolio built with React, TypeScript, and Vite.</p>
 
-## React Compiler
+<p><a href="https://portofolio-warsa.my.id"><strong>Live Demo</strong></a> · <a href="https://github.com/warsaftharith/my-portofolio"><strong>Source Code</strong></a></p>
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+</div>
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+![WARSA Developer portfolio banner](src/assets/banner-warsa-profile.webp)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Overview
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+WARSA Developer adalah website portofolio pribadi untuk memperkenalkan profil, keterampilan, pengalaman, proyek, serta layanan pengembangan website. Antarmuka dirancang responsif dengan navigasi dan tampilan yang dapat disesuaikan oleh pengunjung.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+**Website:** [portofolio-warsa.my.id](https://portofolio-warsa.my.id)
+
+## Features
+
+- **Profile Hero & Banner** — tampilan profil dengan banner, avatar, informasi singkat, dan statistik.
+- **Appearance Preferences** — pilihan tema terang, gelap, atau mengikuti sistem, serta pengaturan warna aksen.
+- **Multilingual Interface** — pilihan bahasa manual dan mode otomatis mengikuti bahasa browser untuk bahasa yang didukung.
+- **Adaptive Navigation** — navbar dan opsi dock yang menyesuaikan desktop maupun perangkat mobile.
+- **Project Showcase** — bagian untuk menampilkan karya dan pengalaman pengembangan.
+- **Service Pricing** — halaman `/pricelist` untuk melihat pilihan layanan.
+- **First-Visit Tour** — pengenalan fitur dan navigasi untuk pengunjung baru.
+- **Image-Aware Loading** — menyiapkan aset utama seperti banner dan foto profil sebelum tampilan utama dibuka.
+
+## Tech Stack
+
+| Area | Technologies |
+| --- | --- |
+| Frontend | React, TypeScript |
+| Build Tool | Vite |
+| Styling | Tailwind CSS, CSS |
+| Animation | Framer Motion, Lottie React |
+| Navigation | React Router |
+| Icons | Lucide React, React Icons, Heroicons |
+| Analytics | Vercel Analytics, Speed Insights |
+
+## Run Locally
+
+Requirements: Node.js and npm.
+
+```bash
+git clone https://github.com/warsaftharith/my-portofolio.git
+cd my-portofolio
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Buka alamat lokal yang ditampilkan oleh Vite (umumnya `http://localhost:5173`).
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Build dan preview versi production:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run build
+npm run preview
 ```
->>>>>>> c50f70d (first commit)
+
+## Live Demo
+
+Website dapat diakses langsung melalui:
+
+### [https://portofolio-warsa.my.id](https://portofolio-warsa.my.id)
+
+Halaman layanan: [View Price List](https://portofolio-warsa.my.id/pricelist)
+
+## Repository
+
+Source code: [github.com/warsaftharith/my-portofolio](https://github.com/warsaftharith/my-portofolio)
+
+---
+
+<div align="center">
+  <sub>Designed and developed for WARSA Developer.</sub>
+</div>
