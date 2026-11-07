@@ -1,0 +1,161 @@
+/* WARSA V3.5.7 — 3 reference-based docks (Apple/Jelly, Capsule/Elastic, Liquid/Lens).
+   Scoped: Minimal, Solid, factory Navbar, Hero and Appearance aren't restyled. */
+.wa-motion-dock-357 {
+  --wa357-accent: var(--wa-accent, #176fe5);
+  --wa357-ink: #142033;
+  --wa357-muted: rgba(20,32,51,.66);
+  --wa357-frame: rgba(250,252,255,.76);
+  --wa357-border: rgba(255,255,255,.65);
+  --wa357-highlight: rgba(255,255,255,.9);
+  position:fixed;
+  z-index:49;
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  gap:var(--wa357-gap,6px);
+  width:max-content;
+  max-width:calc(100dvw - 16px);
+  max-height:calc(100dvh - 32px);
+  padding:6px;
+  border-radius:999px;
+  border:1px solid var(--wa357-border);
+  color:var(--wa357-ink);
+  background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,.035)),var(--wa357-frame);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 -1px 0 rgba(255,255,255,.09),0 12px 32px rgba(0,0,0,.21);
+  -webkit-backdrop-filter:blur(var(--wa357-blur,22px)) saturate(180%);
+  backdrop-filter:blur(var(--wa357-blur,22px)) saturate(180%);
+  isolation:isolate;
+  user-select:none;
+  -webkit-user-select:none;
+  touch-action:manipulation;
+  scrollbar-width:none;
+}
+.wa-motion-dock-357::-webkit-scrollbar {display:none;}
+html.dark .wa-motion-dock-357 {
+  --wa357-ink:#eef5ff;
+  --wa357-muted:rgba(235,243,255,.76);
+  --wa357-frame:rgba(22,33,51,var(--wa357-opacity,.76));
+  --wa357-border:rgba(236,243,255,.24);
+  --wa357-highlight:rgba(255,255,255,.18);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.27),inset 0 -1px rgba(255,255,255,.06),0 16px 42px rgba(0,0,0,.36);
+}
+html:not(.dark) .wa-motion-dock-357 {
+  --wa357-frame:rgba(246,250,255,var(--wa357-opacity,.76));
+}
+.wa-motion-dock-357.wa357-bottom { bottom:max(16px,env(safe-area-inset-bottom));left:50%;translate:-50% 0;}
+.wa-motion-dock-357.wa357-left {left:14px;top:50%;translate:0 -50%;flex-direction:column;max-height:calc(100dvh - 105px);overflow-y:auto;}
+.wa-motion-dock-357.wa357-right {right:14px;top:50%;translate:0 -50%;flex-direction:column;max-height:calc(100dvh - 105px);overflow-y:auto;}
+.wa-motion-dock-357 .wa357-item {
+  position:relative;
+  flex:0 0 auto;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:3px;
+  width:var(--wa357-width,60px);
+  min-height:var(--wa357-height,57px);
+  padding:7px 3px;
+  border:0;
+  border-radius:999px;
+  background:transparent;
+  color:var(--wa357-muted);
+  cursor:pointer;
+  font-family:inherit;
+  font-weight:550;
+  line-height:1.2;
+  white-space:nowrap;
+  -webkit-tap-highlight-color:transparent;
+  transition:color .28s ease;
+  outline-offset:2px;
+}
+.wa-motion-dock-357 .wa357-item:focus-visible {outline:2px solid var(--wa357-accent);}
+.wa-motion-dock-357 .wa357-icon,
+.wa-motion-dock-357 .wa357-label {position:relative;z-index:2;display:flex;align-items:center;justify-content:center;}
+.wa-motion-dock-357 .wa357-label {
+  display:block;
+  font-size:var(--wa357-font,10px);
+  font-weight:650;
+  max-width:100%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.wa-motion-dock-357 .wa357-indicator {
+  position:absolute;
+  z-index:0;
+  pointer-events:none;
+  display:block;
+  border-radius:999px;
+  top:6px;
+  bottom:6px;
+  box-sizing:border-box;
+  transform-origin:center;
+}
+.wa-motion-dock-357.wa357-left .wa357-indicator,
+.wa-motion-dock-357.wa357-right .wa357-indicator {
+  left:6px;
+  right:6px;
+  top:0;
+  bottom:auto;
+}
+.wa-motion-dock-357 .wa357-shine {
+  position:absolute;
+  left:14%;right:14%;top:3px;height:34%;
+  border-radius:999px;
+  background:linear-gradient(180deg,rgba(255,255,255,.78),transparent);
+  opacity:.68;
+}
+/* Apple Dock — glass tabs with a velocity-driven jelly indicator */
+.wa-motion-dock-357.wa357-apple .wa357-indicator {
+  background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(255,255,255,.58));
+  border:1px solid rgba(255,255,255,.75);
+  box-shadow:inset 0 1px rgba(255,255,255,.96),0 6px 18px rgba(0,0,0,.14),0 0 13px color-mix(in srgb,var(--wa357-accent) 18%,transparent);
+}
+html.dark .wa-motion-dock-357.wa357-apple .wa357-indicator {
+  background:linear-gradient(180deg,color-mix(in srgb,var(--wa357-accent) 23%,#fff),color-mix(in srgb,var(--wa357-accent) 12%,#c8d2e5));
+}
+.wa-motion-dock-357.wa357-apple .wa357-selected {color:var(--wa357-accent);}
+/* Capsule — slower trailing edge = elastic/ink pill */
+.wa-motion-dock-357.wa357-capsule {
+  background:linear-gradient(180deg,rgba(235,242,255,.22),rgba(235,242,255,.05)),var(--wa357-frame);
+}
+.wa-motion-dock-357.wa357-capsule .wa357-indicator {
+  background:linear-gradient(180deg,color-mix(in srgb,var(--wa357-accent) 78%,#18233a),color-mix(in srgb,var(--wa357-accent) 60%,#0a1428));
+  box-shadow:inset 0 1px rgba(255,255,255,.26),0 7px 18px color-mix(in srgb,var(--wa357-accent) 24%,transparent);
+}
+.wa-motion-dock-357.wa357-capsule .wa357-selected {color:#fff;}
+/* Liquid Glass — press, move and release the magnifying lens */
+.wa-motion-dock-357.wa357-liquid {touch-action:none;}
+.wa-motion-dock-357.wa357-liquid .wa357-indicator {
+  background:linear-gradient(180deg,rgba(255,255,255,.94),rgba(255,255,255,.57));
+  -webkit-backdrop-filter:blur(3px) saturate(220%) brightness(1.12);
+  backdrop-filter:blur(3px) saturate(220%) brightness(1.12);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,1),inset 0 -1px rgba(255,255,255,.28),0 8px 24px rgba(0,0,0,.19),0 0 16px color-mix(in srgb,var(--wa357-accent) 16%,transparent);
+}
+.wa-motion-dock-357.wa357-liquid .wa357-under-lens {color:var(--wa357-accent);}
+.wa-motion-dock-357.wa357-liquid .wa357-selected:not(.wa357-under-lens) {color:var(--wa357-accent);}
+html.dark .wa-motion-dock-357.wa357-liquid .wa357-indicator {
+  background:linear-gradient(180deg,rgba(255,255,255,.94),rgba(225,237,255,.61));
+}
+.wa-motion-dock-357.wa357-left .wa357-item,
+.wa-motion-dock-357.wa357-right .wa357-item {width:max(48px,var(--wa357-width,60px));}
+.wa-motion-dock-357.wa357-mobile {padding:5px;}
+.wa-motion-dock-357.wa357-mobile.wa357-bottom {
+  bottom:max(10px,env(safe-area-inset-bottom));
+  gap:min(var(--wa357-gap,6px),5px);
+}
+.wa-motion-dock-357.wa357-mobile.wa357-bottom .wa357-item {
+  width:min(var(--wa357-width,60px),calc((100dvw - 64px) / 5));
+  min-width:36px;
+  padding-inline:1px;
+}
+.wa-motion-dock-357.wa357-mobile.wa357-left {left:7px;}
+.wa-motion-dock-357.wa357-mobile.wa357-right {right:7px;}
+.wa-motion-dock-357.wa357-mobile .wa357-label {font-size:min(var(--wa357-font,10px),10px);}
+@media(max-width:359px) {
+  .wa-motion-dock-357.wa357-mobile.wa357-bottom {gap:2px;padding:4px;}
+  .wa-motion-dock-357.wa357-mobile.wa357-bottom .wa357-item {width:calc((100dvw - 48px)/5);}
+}
+@media(prefers-reduced-motion:reduce) {
+  .wa-motion-dock-357 *, .wa-motion-dock-357 .wa357-item {transition:none!important;}
+}

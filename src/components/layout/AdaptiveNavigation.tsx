@@ -13,6 +13,7 @@ import { ar } from "../../lang/ar";
 import { sas } from "../../lang/sas";
 import { useNavigationAppearance } from "../../context/NavigationAppearanceContext";
 import type { NavConfig } from "../../context/NavigationAppearanceContext";
+import WarsaMotionDock from "./WarsaMotionDock";
 import "../../styles/warsa-navigation.css";
 
 const LINKS = [
@@ -177,6 +178,24 @@ function CustomDock({ config, mobile }: { config: NavConfig; mobile: boolean }) 
     const top = element.getBoundingClientRect().top + window.scrollY - (mobile ? 24 : 76);
     window.scrollTo({ top: Math.max(0, top), behavior: reduce || !config.animate ? "auto" : "smooth" });
   };
+
+  // WARSA_DOCK_REFERENCE_V357 — three opt-in reference models only.
+  // Original, Minimal and Solid still use their existing implementation.
+  // WARSA_DOCK_LIVE_POSITION_FIX_V3512 — reset spring/geometry when position changes.
+  if (config.style === "apple" || config.style === "liquid" || config.style === "capsule") {
+    return (
+      <WarsaMotionDock
+        key={`wa-motion-${config.style}-${config.position}-${mobile ? "mobile" : "desktop"}`}
+        items={LINKS.map((link) => ({ section: link.section, icon: link.icon, label: t[link.key] }))}
+        value={active}
+        onSelect={select}
+        config={config}
+        mobile={mobile}
+        hidden={dockHidden}
+      />
+    );
+  }
+
   return (
     <motion.nav
       ref={navRef}
