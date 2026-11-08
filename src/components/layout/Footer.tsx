@@ -89,20 +89,31 @@ const Footer = () => {
           {/* SOCIAL */}
           <div className="flex gap-3">
             {socials.map((social) => (
-              <a
-                key={social.name}
-                href={social.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 flex items-center justify-center rounded-xl 
-                bg-slate-100 dark:bg-slate-900 
-                border border-slate-200 dark:border-slate-800 
-                text-slate-600 dark:text-slate-400 
-                hover:bg-emerald-500 hover:text-white hover:border-emerald-500 
-                transition-all duration-300"
-              >
-                {social.icon}
-              </a>
+              
+          <a
+            key={social.name}
+            href={social.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Kunjungi ${social.name} Warsa Developer`}
+            title={social.name}
+            className="w-10 h-10 flex items-center justify-center rounded-xl
+              bg-slate-100 dark:bg-slate-900
+              border border-slate-200 dark:border-slate-800
+              text-slate-600 dark:text-slate-400
+              hover:bg-emerald-500 hover:text-white hover:border-emerald-500
+              hover:-translate-y-1 hover:shadow-md
+              focus-visible:outline-none focus-visible:ring-2
+              focus-visible:ring-emerald-500 focus-visible:ring-offset-2
+              dark:focus-visible:ring-offset-slate-950
+              transition-all duration-300
+              motion-reduce:transform-none"
+          >
+            <span aria-hidden="true" className="text-lg">
+              {social.icon}
+            </span>
+          </a>
+
             ))}
           </div>
         </div>
